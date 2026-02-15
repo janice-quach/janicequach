@@ -1,47 +1,63 @@
 # janicequach.com
 
-Static personal site. Clean, minimal design. Replace Squarespace.
+personal site. clean, minimal, fast. squarespace replacement.
 
-## Local Development
+## preview locally
 
 ```bash
-# Serve locally
 python -m http.server 8000
-# Visit http://localhost:8000
+# visit http://localhost:8000
 ```
 
-## Deployment
+## what's in it
 
-Deploy to GitHub Pages, Netlify, Vercel, or Cloudflare Pages.
+- lowercase casual tone (matches your voice)
+- your actual principles from ~/space/human/principles.md
+- leadership philosophy from manifesto
+- current focus (clickview, ai, team building)
+- mobile responsive
+- zero dependencies, loads in <100ms
 
-### GitHub Pages
+## deploy
 
+fastest: **netlify drop**
+1. drag `index.html` to netlify.com/drop
+2. get instant URL
+3. connect custom domain (janicequach.com) in settings
+
+alternative: **github pages**
 ```bash
-# Create repo janice-quach/janice-quach.github.io
-# Push this code
-# Auto-publishes to janicequach.github.io
+gh repo create janice-quach.github.io --public
+git remote add origin git@github.com:janice-quach/janice-quach.github.io.git
+git add index.html README.md
+git commit -m "init: personal site"
+git push -u origin main
+# auto-publishes to janice-quach.github.io
 ```
 
-### Netlify
+## customize
 
-```bash
-# Drag index.html to netlify.com/drop
-# Or connect GitHub repo
-```
+all content in `index.html`:
+- L163-167: tagline + intro
+- L172-181: principles (currently from your actual principles.md)
+- L186-196: how you work (from manifesto)
+- L201-207: current focus
+- L213-215: contact links (update email to real address)
 
-## Customize
+## next steps
 
-Edit `index.html`:
-- Line 85: Name
-- Line 86: Subtitle/role
-- Line 92: About text
-- Line 98-102: Projects list
-- Line 109-111: Contact links (update URLs)
+- [ ] update email address (L214: hello@janicequach.com)
+- [ ] add linkedin URL (L215)
+- [ ] optional: add photo/avatar
+- [ ] optional: add case studies section
+- [ ] optional: analytics (plausible.io or simple-analytics)
+- [ ] deploy to netlify or github pages
+- [ ] point janicequach.com domain to deployment
 
-## Next
+## why this over squarespace
 
-- [ ] Add profile photo
-- [ ] Link to actual social profiles
-- [ ] Add case studies / portfolio pieces
-- [ ] Custom domain setup
-- [ ] Analytics (plausible or simple-analytics)
+- loads 10x faster (no bloat)
+- full control over content
+- version controlled (git)
+- free hosting (netlify/github)
+- embodies your principles (structure creates speed, clarity over cleverness)

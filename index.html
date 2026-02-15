@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janice Quach</title>
+    <title>janice quach</title>
     <style>
         * {
             margin: 0;
@@ -13,47 +13,68 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fafafa;
+            padding: 2rem 1rem;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 680px;
             margin: 0 auto;
-            padding: 4rem 2rem;
         }
 
         header {
-            text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         h1 {
-            font-size: 3rem;
-            font-weight: 300;
+            font-size: 2.5rem;
+            font-weight: 500;
             margin-bottom: 0.5rem;
+            text-transform: lowercase;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
+        .tagline {
+            font-size: 1.1rem;
             color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 2rem;
+            max-width: 580px;
         }
 
         section {
-            background: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
         }
 
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
-            font-weight: 400;
-            border-bottom: 2px solid #333;
-            padding-bottom: 0.5rem;
+            font-weight: 500;
+            text-transform: lowercase;
+            color: #2a2a2a;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .principles {
+            background: white;
+            padding: 1.5rem;
+            border-left: 3px solid #333;
+            margin: 1.5rem 0;
+        }
+
+        .principles li {
+            margin-bottom: 0.75rem;
+            color: #444;
         }
 
         ul {
@@ -61,66 +82,107 @@
             padding-left: 0;
         }
 
-        li {
-            padding: 0.5rem 0;
+        li::before {
+            content: "→ ";
+            color: #999;
+            margin-right: 0.5rem;
         }
 
         a {
             color: #0066cc;
             text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
         }
 
         a:hover {
-            text-decoration: underline;
+            border-bottom-color: #0066cc;
         }
 
-        .links {
+        .contact {
             display: flex;
             gap: 2rem;
-            justify-content: center;
-            margin-top: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         footer {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            color: #999;
             font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .contact {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Janice Quach</h1>
-            <p class="subtitle">Design Executive | ClickView</p>
+            <h1>janice quach</h1>
+            <p class="tagline">ux design lead at clickview</p>
+            <p class="intro">
+                i build creative, collaborative teams that experiment, innovate, and solve real needs together.
+                what lights me up: curiosity, openness, growth, and work that actually matters.
+            </p>
         </header>
 
         <section>
-            <h2>About</h2>
-            <p>Design executive focused on education technology and product strategy. Currently working at ClickView on US expansion and AI integration.</p>
+            <h2>what i believe</h2>
+            <div class="principles">
+                <ul>
+                    <li>clarity over cleverness — if it requires explanation, it's not clear enough</li>
+                    <li>structure creates speed — clear systems reduce friction and compound over time</li>
+                    <li>build once, reuse often — solve in ways that scale, not just in ways that ship</li>
+                    <li>intentional trade-offs — every decision optimizes something and sacrifices something. say it out loud</li>
+                    <li>quality reflects intent — the way something is made reflects how much you care about the people using it</li>
+                </ul>
+            </div>
         </section>
 
         <section>
-            <h2>Projects</h2>
+            <h2>how i work</h2>
+            <p>
+                i prefer bringing people on the journey over just getting buy-in. when others are part of the inception of the idea, it becomes part of them — they feel invested. this creates shared ownership rather than a one-way sign-off process.
+            </p>
+            <p>
+                what frustrates me most is when people don't bring their own thinking to the table. if i have to steer every decision or inject every idea, it stops being a team and starts being a funnel.
+            </p>
+            <p>
+                i want us to riff, build, disagree, explore and come out with something better than any of us could've made alone.
+            </p>
+        </section>
+
+        <section>
+            <h2>current focus</h2>
             <ul>
-                <li><strong>Recipe Planner</strong> — Personal meal planning tool with dietary constraints</li>
-                <li><strong>Icon Generator</strong> — Automated asset generation for topics</li>
-                <li><strong>ClickView Research</strong> — Competitive analysis and AI integration strategy</li>
+                <li>us expansion for clickview (edtech, 6k schools, 98% renewal rate)</li>
+                <li>ai integration opportunities in education</li>
+                <li>building autonomous, high-trust design teams</li>
+                <li>translating messy human dynamics into clean forward motion</li>
             </ul>
         </section>
 
         <section>
-            <h2>Contact</h2>
-            <div class="links">
-                <a href="mailto:janice@example.com">Email</a>
-                <a href="https://linkedin.com/in/janicequach" target="_blank">LinkedIn</a>
-                <a href="https://github.com/janice-quach" target="_blank">GitHub</a>
+            <h2>get in touch</h2>
+            <div class="contact">
+                <a href="mailto:hello@janicequach.com">email</a>
+                <a href="https://linkedin.com/in/janicequach" target="_blank">linkedin</a>
             </div>
         </section>
 
         <footer>
-            <p>&copy; 2026 Janice Quach</p>
+            <p>© 2026 janice quach</p>
         </footer>
     </div>
 </body>
