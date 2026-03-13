@@ -39,6 +39,15 @@
         }
     },
     "files": {
-        "includes": ["**/src/**/*.ts", "**/src/**/*.js", "**/src/**/*.astro", "**/src/**/*.css", "**/*.mjs", "!**/node_modules", "!**/dist", "!**/.astro"]
+        "includes": [
+            "**/src/**/*.ts",
+            "**/src/**/*.js",
+            "**/src/**/*.astro",
+            "**/src/**/*.css",
+            "**/*.mjs",
+            "!**/node_modules",
+            "!**/dist",
+            "!**/.astro"
+        ]
     }
 }

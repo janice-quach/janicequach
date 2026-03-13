@@ -5,57 +5,50 @@ import Base from "../layouts/Base.astro";
 ---
 <Base title="think — janice quach" description="clarity over cleverness. how janice quach thinks about design, systems, and trade-offs.">
     <div class="bg-layer" id="bgLayer"></div>
-    <div class="page">
-        <div class="diagram-col">
-            <div class="orb orb-a"></div>
-            <div class="orb orb-b"></div>
-            <ScrollMorphDiagram />
-        </div>
-        <div class="text-col" id="textCol">
-            <section class="text-section" data-section="0">
-                <div class="text-inner">
-                    <p class="section-num">think</p>
-                    <h2>clarity over cleverness</h2>
-                    <p>if it needs explaining, it's not clear enough. i believe in principles that compound — simple rules that make every decision after them easier.</p>
-                    <p>this is how my brain works. ideas start scattered. the work is finding the structure underneath.</p>
-                </div>
-            </section>
-            <section class="text-section" data-section="1">
-                <div class="text-inner">
-                    <p class="section-num">01 — structure</p>
-                    <h2>structure creates speed</h2>
-                    <p>clear systems reduce friction and compound over time. i don't build processes for process sake — i build them because the right structure means the team spends less time navigating and more time making.</p>
-                    <p>every decision optimises something and sacrifices something. i'd rather say that out loud than pretend we can have it all.</p>
-                </div>
-            </section>
-            <section class="text-section" data-section="2">
-                <div class="text-inner">
-                    <p class="section-num">02 — systems</p>
-                    <h2>build once, reuse often</h2>
-                    <p>solve in ways that scale, not just in ways that ship. the way something is made reflects how much you care about the people using it.</p>
-                    <p>i think in systems. not because systems are elegant, but because the right system means the next person doesn't have to solve the same problem again.</p>
-                </div>
-            </section>
-            <section class="text-section" data-section="3">
-                <div class="text-inner">
-                    <p class="section-num">03 — trade-offs</p>
-                    <h2>intentional trade-offs</h2>
-                    <p>every decision optimises something and sacrifices something. the honest thing to do is say it out loud — not hide behind "best practice" or pretend trade-offs don't exist.</p>
-                    <p>i'd rather make a clear decision with known costs than an unclear one that feels safe.</p>
-                </div>
-            </section>
-            <section class="text-section" data-section="4">
-                <div class="text-inner">
-                    <p class="section-num">04 — intent</p>
-                    <h2>quality reflects intent</h2>
-                    <p>the way something is made reflects how much you care about the people using it. every pixel, every interaction, every word — it all communicates care or carelessness.</p>
-                    <p>the best work feels obvious. not because it's simple, but because someone made the complexity invisible.</p>
-                </div>
-            </section>
-        </div>
-    </div>
-    <PageFooter prompt="want to riff on how things should work?" theme="think" />
     <a class="back-btn" href="/">← back</a>
+    <div class="page">
+        <section class="scroll-section" data-section="0">
+            <div class="diagram-area">
+                <div class="orb orb-a"></div>
+                <div class="orb orb-b"></div>
+                <ScrollMorphDiagram />
+            </div>
+            <div class="text-bubble">
+                <p class="section-num">think</p>
+                <h2>clarity over cleverness</h2>
+                <p>my brain works like this — ideas start scattered, and the job is finding the structure underneath. whether it's research, design, or strategy, i'm drawn to simple rules that make every decision after them easier.</p>
+            </div>
+        </section>
+        <section class="scroll-section" data-section="1">
+            <div class="text-bubble">
+                <p class="section-num">01 — structure</p>
+                <h2>structure creates speed</h2>
+                <p>good structure means less time navigating, more time making. i sit inside the product team, not next to it — so the frameworks i build have to work for engineers and PMs too, not just designers.</p>
+            </div>
+        </section>
+        <section class="scroll-section" data-section="2">
+            <div class="text-bubble">
+                <p class="section-num">02 — systems</p>
+                <h2>build once, reuse often</h2>
+                <p>i think in systems — not because they're elegant, but because the right one means the next person doesn't have to solve the same problem again.</p>
+            </div>
+        </section>
+        <section class="scroll-section" data-section="3">
+            <div class="text-bubble">
+                <p class="section-num">03 — trade-offs</p>
+                <h2>intentional trade-offs</h2>
+                <p>every decision optimises for something and sacrifices something else. i'd rather name that out loud than hide behind "best practice." what's the trade-off? what are we giving up? if we can't answer that, we haven't actually decided anything.</p>
+            </div>
+        </section>
+        <section class="scroll-section" data-section="4">
+            <div class="text-bubble">
+                <p class="section-num">04 — intent</p>
+                <h2>quality reflects intent</h2>
+                <p>you can feel when someone cared about the thing they made. the best work feels obvious — not because it's simple, but because someone made the complexity invisible.</p>
+            </div>
+        </section>
+    </div>
+    <PageFooter theme="think" />
 </Base>
 
 <style>
@@ -92,76 +85,170 @@ import Base from "../layouts/Base.astro";
     }
 
     .page {
-        display: flex;
-        min-height: 100vh;
+        position: relative;
     }
 
-    .diagram-col {
-        width: 50%;
-        height: 100vh;
-        position: sticky;
-        top: 0;
+    .scroll-section {
+        min-height: 100vh;
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
+    }
+
+    .diagram-area {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
     }
 
     .orb-a {
-        width: 400px; height: 400px;
+        width: 500px; height: 500px;
         background: radial-gradient(circle at 40% 40%, rgba(168, 190, 140, 0.4), transparent 70%);
-        top: -80px; right: -80px;
+        top: -120px; right: -120px;
     }
 
     .orb-b {
-        width: 300px; height: 300px;
+        width: 400px; height: 400px;
         background: radial-gradient(circle at 60% 60%, rgba(200, 220, 180, 0.3), transparent 70%);
-        bottom: -60px; left: -40px;
+        bottom: -100px; left: -80px;
     }
 
-    .text-col {
-        width: 50%;
-        position: relative;
-        z-index: 1;
+    .text-bubble {
+        position: fixed;
+        bottom: 3rem;
+        right: 3rem;
+        z-index: 10;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(42, 58, 37, 0.08);
+        border-radius: 20px;
+        padding: 2rem 2.4rem;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
     }
 
-    .text-section {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        padding: 4rem 3rem 4rem 2rem;
+    .scroll-section:not(:first-child) .text-bubble {
+        display: none;
     }
-
-    .text-inner { max-width: 440px; }
 
     .section-num {
         font-size: 0.6rem;
         letter-spacing: 0.2em;
         text-transform: uppercase;
         color: rgba(42, 58, 37, 0.3);
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
-    .text-section h2 {
-        font-size: 2.4rem;
+    .text-bubble h2 {
+        font-size: 1.8rem;
         line-height: 1.15;
-        margin-bottom: 1.2rem;
+        margin-bottom: 0.8rem;
         color: #1e2e1a;
     }
 
-    .text-section p {
-        font-size: 0.95rem;
+    .text-bubble p {
+        font-size: 0.85rem;
         font-weight: 300;
         line-height: 1.85;
         color: #3d4d38;
     }
 
-    .text-section p + p { margin-top: 1rem; }
-
     @media (max-width: 900px) {
-        .page { flex-direction: column; }
-        .diagram-col { width: 100%; height: 50vh; }
-        .text-col { width: 100%; }
-        .text-section { min-height: 80vh; padding: 3rem 2rem; }
+        .text-bubble {
+            right: 1.5rem;
+            left: 1.5rem;
+            bottom: 2rem;
+            max-width: none;
+        }
     }
 </style>
+
+<script>
+    const textData = [
+        {
+            num: 'think',
+            headline: 'clarity over cleverness',
+            body: 'my brain works like this — ideas start scattered, and the job is finding the structure underneath. whether it\'s research, design, or strategy, i\'m drawn to simple rules that make every decision after them easier.'
+        },
+        {
+            num: '01 — structure',
+            headline: 'structure creates speed',
+            body: 'good structure means less time navigating, more time making. i sit inside the product team, not next to it — so the frameworks i build have to work for engineers and PMs too, not just designers.'
+        },
+        {
+            num: '02 — systems',
+            headline: 'build once, reuse often',
+            body: 'i think in systems — not because they\'re elegant, but because the right one means the next person doesn\'t have to solve the same problem again.'
+        },
+        {
+            num: '03 — trade-offs',
+            headline: 'intentional trade-offs',
+            body: 'every decision optimises for something and sacrifices something else. i\'d rather name that out loud than hide behind "best practice." what\'s the trade-off? what are we giving up? if we can\'t answer that, we haven\'t actually decided anything.'
+        },
+        {
+            num: '04 — intent',
+            headline: 'quality reflects intent',
+            body: 'you can feel when someone cared about the thing they made. the best work feels obvious — not because it\'s simple, but because someone made the complexity invisible.'
+        }
+    ];
+
+    const bubble = document.querySelector('.text-bubble') as HTMLElement;
+    const bubbleNum = bubble.querySelector('.section-num') as HTMLElement;
+    const bubbleH2 = bubble.querySelector('h2') as HTMLElement;
+    const bubbleP = bubble.querySelector('p:last-child') as HTMLElement;
+    const sections = document.querySelectorAll('.scroll-section');
+
+    // Keep only the first bubble visible, remove duplicates from other sections
+    sections.forEach((sec, i) => {
+        if (i > 0) {
+            const extraBubble = sec.querySelector('.text-bubble');
+            if (extraBubble) extraBubble.remove();
+        }
+    });
+
+    // Make the bubble position:fixed and always visible
+    bubble.style.position = 'fixed';
+
+    function getActiveSection(): number {
+        const scrollY = window.scrollY;
+        const vh = window.innerHeight;
+        return Math.min(Math.round(scrollY / vh), textData.length - 1);
+    }
+
+    let currentSection = -1;
+    let ticking = false;
+
+    function onScroll() {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+                const active = getActiveSection();
+                if (active !== currentSection) {
+                    currentSection = active;
+                    const data = textData[active];
+                    bubble.style.opacity = '0';
+                    setTimeout(() => {
+                        bubbleNum.textContent = data.num;
+                        bubbleH2.textContent = data.headline;
+                        bubbleP.textContent = data.body;
+                        bubble.style.opacity = '1';
+                    }, 200);
+                }
+                ticking = false;
+            });
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Initialize
+    currentSection = 0;
+    bubble.style.opacity = '1';
+</script>
