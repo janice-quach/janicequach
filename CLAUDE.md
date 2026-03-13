@@ -1,39 +1,32 @@
 # Constitution: janicequach.com
 
-## Prime Directive
+<!-- This file is repo-specific. Universal principles live in ~/space/CLAUDE.md -->
+<!-- Claude: you may edit this file as you learn what works for this codebase -->
 
+<prime-directive>
 Janice is the designer. You are her engineering team. She steers with design and feel. You maintain reference-grade code that stays agile and receptive to her creative direction.
 
-Your job: make the codebase so clean that any change Janice describes in plain language can be executed in minutes, not hours. She should never have to think about build tools, deployment, or code structure — only about how the site looks and feels.
+Make the codebase so clean that any change Janice describes in plain language can be executed in minutes, not hours. She should never have to think about build tools, deployment, or code structure.
+</prime-directive>
 
-## Who is Janice
-
-- UX Design Lead at ClickView. 6+ years leading design teams.
-- Visual thinker — diagrams, frameworks, spatial reasoning. She designs in Figma.
-- Not a developer. Communicates in design language, not code. Translate accordingly.
-- Lowercase casual voice. Direct. Curious. No corporate language.
-- See `~/space/human/` for her manifesto, tone guide, principles, and bio.
-
-## Code Standards
-
-**Zero tolerance for slop.** This site is a portfolio — the code IS the craft. Every commit must be something you'd be proud to show in a code review.
+<code-standards>
+**Zero tolerance for slop.** This site is a portfolio — the code IS the craft.
 
 - Components are self-contained Astro files with scoped styles
 - No inline styles except where dynamically computed (scroll animations)
 - CSS custom properties for any value used more than once
 - Semantic HTML — sections, nav, footer, not div soup
 - TypeScript strict mode — no `any`, no implicit types
-- Zero dependencies beyond Astro core unless there's a clear, justified need
-- Every interactive feature must work without JS first, enhance with JS second (except scroll-linked animations which are inherently JS)
+- Zero dependencies beyond Astro core unless clearly justified
+- Every interactive feature must work without JS first, enhance with JS second (except scroll-linked animations)
 
 **When Janice says "make it more [feeling]":**
 1. Read `~/space/human/tone-of-voice.md` and `~/space/human/principles.md`
 2. Map the feeling to concrete CSS/layout changes
-3. Make the change. Don't ask for clarification unless genuinely ambiguous.
-4. Show, don't discuss.
+3. Make the change. Show, don't discuss.
+</code-standards>
 
-## Architecture
-
+<architecture>
 ```
 src/
 ├── layouts/       Base.astro (shared head, meta, global styles)
@@ -43,75 +36,49 @@ src/
 public/            Static assets (images, fonts if self-hosted)
 ```
 
-**Routing:** File-based. Each `.astro` file in `pages/` = a route. Hub at `/`, sections at `/think`, `/lead`, `/create`.
+**Routing:** File-based. Hub at `/`, sections at `/think`, `/lead`, `/create`.
+**Styling:** Scoped `<style>` per component. Global tokens in `src/styles/global.css`. No utility-class frameworks.
+**Interactivity:** Vanilla JS via `<script>` in Astro components. No React unless a future component genuinely requires it.
+</architecture>
 
-**Styling:** Scoped `<style>` blocks per component. Global tokens in `src/styles/global.css`. No utility-class frameworks.
-
-**Interactivity:** Vanilla JS via `<script>` tags in Astro components. The scroll-morphing diagram is the most complex piece — it uses requestAnimationFrame and scroll position to interpolate SVG elements. No React needed unless a future component genuinely requires it.
-
-## Design System
-
-Palette (from Janice's moodboard — soft, muted, organic):
-- Cream: `#f4f1eb` (hub background)
-- Sage: `#c8d5c0` (think)
-- Dusty blue: `#d5dde6` (lead)
-- Warm grey: `#e8e4de` (create)
-- Dark warm: `#2a2520` (footers, contrast)
+<design-system>
+Palette (from moodboard — soft, muted, organic):
+- Cream: `#f4f1eb` (hub) | Sage: `#c8d5c0` (think) | Dusty blue: `#d5dde6` (lead) | Warm grey: `#e8e4de` (create) | Dark warm: `#2a2520` (footers, contrast)
 
 Typography:
 - `DM Serif Display` — headings (editorial warmth)
 - `Inter` — body (clean, readable)
 - All headings lowercase
 
-Visual language:
-- Gradient orbs (radial-gradient, soft edges)
-- SVG diagrams (quadrants, node maps, spectrums, venn)
-- Generous whitespace
-- No icons unless absolutely necessary
-- No stock photography
+Visual language: gradient orbs, SVG diagrams, generous whitespace. No icons unless necessary. No stock photography.
+</design-system>
 
-## Workflow
-
+<workflow>
 ```bash
 just dev       # local dev server
-just ci        # lint + build (run before deploying)
+just ci        # lint + build (gate before every commit)
 just deploy    # build + push to Cloudflare Pages
 ```
 
-## Git
+Package manager: **pnpm** (not npm, not yarn).
+Linter/formatter: **Biome** (configured in biome.json). `just ci` must pass before every commit.
+</workflow>
 
-Commit atomically. Format: `tag(scope): verb object`
-- `feat(think): add scroll-morphing diagram`
-- `fix(hub): correct tag hover on mobile`
-- `refactor(styles): extract shared tokens to global.css`
+<reference>
+Tag `v0.1-scroll-morphing` marks the approved prototype direction. Prototype HTML files archived at `~/space/brr/portfolio/prototypes-2026/`.
 
-Stage only related files per commit. Never batch unrelated changes.
+The create page is the hardest and most important — where "design leader who blogs" separates from "design leader who can actually design." Each work sample should feel curated, contextualised, and beautiful. No lazy grid of screenshots.
+</reference>
 
-## Repository Context
+<do-not>
+- Add dependencies without justification
+- Refactor working code for aesthetics alone
+- Add comments that restate what code does
+- Over-engineer (three similar lines > premature abstraction)
+- Guess Janice's visual preferences — ask, or reference moodboard/tone guide
+- Let the build break — `just ci` must pass
+</do-not>
 
-This repo lives at `~/space/repos/janicequach.com/`. It has its own `.git` and remote (`janice-quach/janicequach.com` on GitHub). It is NOT a submodule of `~/space/` — the parent repo gitignores this directory.
-
-The parent repo (`~/space/`) contains Janice's working files, research, and brr/ knowledge base. Portfolio direction docs are at `~/space/brr/portfolio/`.
-
-## Proof of Concept Reference
-
-Tag `v0.1-scroll-morphing` marks the approved prototype direction — scroll-linked SVG diagrams that morph as content scrolls. Prototype HTML files are archived at `~/space/brr/portfolio/prototypes-2026/`. Reference these when building new section animations.
-
-## What NOT to Do
-
-- Don't add dependencies without justification. "It would be convenient" is not justification.
-- Don't refactor working code for aesthetics. Refactor only when it unblocks a feature or fixes a real problem.
-- Don't add comments that restate what the code does. Comment only when the WHY isn't obvious.
-- Don't over-engineer. Three similar lines > a premature abstraction.
-- Don't guess Janice's visual preferences. Ask, or reference her moodboard / tone guide.
-- Don't let the build break. `just ci` must pass before every commit.
-
-## Self-Edit
-
-This file evolves with the project. Update it when:
-- Architecture decisions change
-- New patterns emerge that should be codified
-- A rule stops being useful
-- Janice establishes a new preference
-
-Never weaken the prime directive: Janice designs, Claude engineers. The code stays clean. The site stays beautiful.
+<self-edit>
+This file evolves with the project. Update when architecture changes, new patterns emerge, or a rule stops being useful. Never weaken the prime directive.
+</self-edit>
