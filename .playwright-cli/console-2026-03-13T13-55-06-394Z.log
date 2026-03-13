@@ -1,9 +1,0 @@
-[     214ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ http://localhost:7777/@vite/client:0
-[     214ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ http://localhost:7777/@id/astro/runtime/client/dev-toolbar/entrypoint.js:0
-[     214ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ http://localhost:7777/src/components/PageFooter.astro?astro&type=style&index=0&lang.css:0
-[     214ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ http://localhost:7777/src/components/ScrollMorphDiagram.astro?astro&type=style&index=0&lang.css:0
-[     214ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ http://localhost:7777/src/layouts/Base.astro?astro&type=style&index=0&lang.css:0
-[     214ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ http://localhost:7777/src/pages/think.astro?astro&type=style&index=0&lang.css:0
-[     214ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:7777/src/components/ScrollMorphDiagram.astro?astro&type=script&index=0&lang.ts:0
-[     214ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:7777/src/pages/think.astro?astro&type=script&index=0&lang.ts:0
-[     905ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:7777/favicon.ico:0
