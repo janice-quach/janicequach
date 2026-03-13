@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>janice quach</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.7;
+            color: #2a2a2a;
+            overflow-x: hidden;
+            background: #f4f1eb;
+        }
+
+        /* ===== HUB PAGE ===== */
+        .hub {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 4rem 2rem;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .hub.hidden {
+            opacity: 0;
+            transform: scale(0.98);
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+        }
+
+        /* Background orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle at 30% 40%, rgba(180, 195, 176, 0.35), transparent 70%);
+            top: -200px; right: -200px;
+        }
+
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle at 60% 50%, rgba(195, 210, 225, 0.3), transparent 70%);
+            bottom: -150px; left: -150px;
+        }
+
+        .orb-3 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle at 50% 50%, rgba(220, 200, 180, 0.25), transparent 70%);
+            top: 40%; left: 50%; transform: translateX(-50%);
+        }
+
+        .hub-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .hub-content h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 5rem;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+
+        .hub-content .intro {
+            font-size: 1.1rem;
+            color: #6b6b6b;
+            font-weight: 300;
+            max-width: 440px;
+            margin: 0 auto 4rem;
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.3rem;
+            padding: 1rem 2.5rem;
+            border: 1px solid rgba(26, 26, 26, 0.15);
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            color: #2a2a2a;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tag::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 60px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .tag-think::before { background: rgba(200, 213, 192, 0.4); }
+        .tag-lead::before { background: rgba(213, 221, 230, 0.4); }
+        .tag-create::before { background: rgba(232, 228, 222, 0.4); }
+
+        .tag:hover::before { opacity: 1; }
+        .tag:hover {
+            border-color: rgba(26, 26, 26, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tag span { position: relative; z-index: 1; }
+
+        /* ===== IMMERSIVE PAGES ===== */
+        .immersive {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            overflow-y: auto;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        .immersive.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 200;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(0,0,0,0.4);
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.08);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: rgba(0,0,0,0.7);
+            background: rgba(255,255,255,0.85);
+        }
+
+        /* Shared immersive styles */
+        .im-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .im-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .im-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0.4;
+        }
+
+        .im-hero h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .im-hero p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .im-section {
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .im-section-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .im-section h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .im-section p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.85;
+        }
+
+        .im-section p + p {
+            margin-top: 1rem;
+        }
+
+        /* ===== THINK PAGE — sage ===== */
+        .page-think { background: #f0f4ed; }
+        .page-think .im-hero { background: #c8d5c0; }
+        .page-think .im-hero h2 { color: #2a3a25; }
+        .page-think .im-hero p { color: #3d4d38; }
+        .page-think .im-label { color: #2a3a25; }
+        .page-think .im-section h3 { color: #2a3a25; }
+        .page-think .im-section p { color: #3d4d38; }
+
+        .page-think .im-hero .orb-a {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle at 40% 40%, rgba(168, 190, 140, 0.5), transparent 70%);
+            top: -100px; right: -100px;
+        }
+
+        .page-think .im-hero .orb-b {
+            width: 350px; height: 350px;
+            background: radial-gradient(circle at 50% 60%, rgba(200, 220, 180, 0.35), transparent 70%);
+            bottom: -50px; left: -50px;
+        }
+
+        .think-s1 { background: #e8ede4; }
+        .think-s2 { background: #dfe6da; }
+        .think-s3 { background: #d6dfd0; }
+
+        /* Quadrant diagram */
+        .quadrant {
+            width: 100%;
+            aspect-ratio: 1;
+            position: relative;
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
+        .q-axis {
+            position: absolute;
+            background: rgba(42, 58, 37, 0.12);
+        }
+
+        .q-axis-v { width: 1px; left: 50%; top: 8%; bottom: 8%; }
+        .q-axis-h { height: 1px; top: 50%; left: 8%; right: 8%; }
+
+        .q-label {
+            position: absolute;
+            font-size: 0.55rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(42, 58, 37, 0.4);
+        }
+
+        .q-label-t { top: 0; left: 50%; transform: translateX(-50%); }
+        .q-label-b { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .q-label-l { left: -10px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+        .q-label-r { right: -10px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+        .q-dot {
+            position: absolute;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #4a6741;
+        }
+
+        .q-dot-label {
+            position: absolute;
+            font-size: 0.65rem;
+            color: #2a3a25;
+            font-weight: 400;
+        }
+
+        .q-zone {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px dashed rgba(42, 58, 37, 0.15);
+        }
+
+        /* Flow diagram */
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .flow-num {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(42, 58, 37, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #4a6741;
+            flex-shrink: 0;
+        }
+
+        .flow-text {
+            font-size: 0.8rem;
+            color: #3d4d38;
+            font-weight: 400;
+        }
+
+        .flow-connector {
+            width: 1px;
+            height: 16px;
+            background: rgba(42, 58, 37, 0.15);
+            margin-left: 17px;
+        }
+
+        /* Venn */
+        .venn {
+            width: 100%;
+            aspect-ratio: 1.2;
+            position: relative;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .venn-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(42, 58, 37, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(42, 58, 37, 0.5);
+        }
+
+        .venn-c1 {
+            width: 180px; height: 180px;
+            top: 10%; left: 15%;
+            background: rgba(168, 190, 140, 0.12);
+        }
+
+        .venn-c2 {
+            width: 180px; height: 180px;
+            top: 10%; right: 15%;
+            background: rgba(140, 170, 190, 0.12);
+        }
+
+        .venn-c3 {
+            width: 180px; height: 180px;
+            bottom: 5%; left: 50%;
+            transform: translateX(-50%);
+            background: rgba(190, 175, 140, 0.12);
+        }
+
+        .venn-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -40%);
+            font-size: 0.55rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #2a3a25;
+            font-weight: 500;
+        }
+
+        /* ===== LEAD PAGE — blue ===== */
+        .page-lead { background: #edf1f5; }
+        .page-lead .im-hero { background: #d5dde6; }
+        .page-lead .im-hero h2 { color: #2a3545; }
+        .page-lead .im-hero p { color: #3d4d5e; }
+        .page-lead .im-label { color: #2a3545; }
+        .page-lead .im-section h3 { color: #2a3545; }
+        .page-lead .im-section p { color: #3d4d5e; }
+
+        .page-lead .im-hero .orb-a {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle at 60% 30%, rgba(160, 180, 210, 0.45), transparent 70%);
+            top: -120px; left: -100px;
+        }
+
+        .page-lead .im-hero .orb-b {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle at 40% 60%, rgba(180, 200, 230, 0.3), transparent 70%);
+            bottom: -80px; right: -80px;
+        }
+
+        .lead-s1 { background: #e4e9ef; }
+        .lead-s2 { background: #dae1e9; }
+        .lead-s3 { background: #d1d9e3; }
+
+        /* Node diagram */
+        .node-map {
+            width: 100%;
+            aspect-ratio: 1;
+            position: relative;
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
+        .node-map svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .node-map svg line {
+            stroke: rgba(42, 53, 69, 0.1);
+            stroke-width: 1;
+        }
+
+        .nm-node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-align: center;
+            color: #3d4d5e;
+        }
+
+        .nm-center {
+            width: 100px; height: 100px;
+            background: rgba(42, 53, 69, 0.1);
+            border: 1px solid rgba(42, 53, 69, 0.18);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.6rem;
+            color: #2a3545;
+            font-weight: 500;
+        }
+
+        .nm-orbit {
+            width: 62px; height: 62px;
+            background: rgba(42, 53, 69, 0.05);
+            border: 1px solid rgba(42, 53, 69, 0.12);
+        }
+
+        .nm-1 { top: 5%; left: 50%; transform: translateX(-50%); }
+        .nm-2 { top: 22%; right: 8%; }
+        .nm-3 { bottom: 22%; right: 8%; }
+        .nm-4 { bottom: 5%; left: 50%; transform: translateX(-50%); }
+        .nm-5 { bottom: 22%; left: 8%; }
+        .nm-6 { top: 22%; left: 8%; }
+
+        /* Tree diagram */
+        .tree-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .tree-node {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(42, 53, 69, 0.15);
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #3d4d5e;
+            letter-spacing: 0.05em;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .tree-trunk {
+            width: 1px;
+            height: 24px;
+            background: rgba(42, 53, 69, 0.12);
+        }
+
+        .tree-branch {
+            display: flex;
+            gap: 0.75rem;
+            position: relative;
+        }
+
+        .tree-branch::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 25%;
+            right: 25%;
+            height: 1px;
+            background: rgba(42, 53, 69, 0.12);
+        }
+
+        .tree-leaf {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid rgba(42, 53, 69, 0.1);
+            border-radius: 20px;
+            font-size: 0.6rem;
+            color: #5a6a7a;
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Spectrum */
+        .spectrums {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .spec-row .spec-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.55rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(42, 53, 69, 0.35);
+            margin-bottom: 6px;
+        }
+
+        .spec-track {
+            height: 2px;
+            background: rgba(42, 53, 69, 0.1);
+            position: relative;
+        }
+
+        .spec-dot {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #4a6078;
+        }
+
+        /* ===== CREATE PAGE — warm ===== */
+        .page-create { background: #f4f1eb; }
+        .page-create .im-hero { background: #e8e4de; }
+        .page-create .im-hero h2 { color: #3a3530; }
+        .page-create .im-hero p { color: #5a5550; }
+        .page-create .im-label { color: #3a3530; }
+        .page-create .im-section h3 { color: #3a3530; }
+        .page-create .im-section p { color: #5a5550; }
+
+        .page-create .im-hero .orb-a {
+            width: 450px; height: 450px;
+            background: radial-gradient(circle at 50% 40%, rgba(220, 200, 170, 0.45), transparent 70%);
+            top: -80px; right: -80px;
+        }
+
+        .page-create .im-hero .orb-b {
+            width: 380px; height: 380px;
+            background: radial-gradient(circle at 40% 60%, rgba(200, 180, 160, 0.3), transparent 70%);
+            bottom: -60px; left: -60px;
+        }
+
+        .create-s1 { background: #ebe7e0; }
+        .create-s2 { background: #e2ddd5; }
+        .create-s3 { background: #d9d3ca; }
+
+        /* Work showcase */
+        .work-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .work-card {
+            aspect-ratio: 4/3;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.4);
+            border: 1px solid rgba(58, 53, 48, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-card-wide {
+            grid-column: span 2;
+            aspect-ratio: 2/1;
+        }
+
+        .work-card-placeholder {
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(58, 53, 48, 0.25);
+        }
+
+        .work-card .work-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(58, 53, 48, 0.06));
+        }
+
+        .work-overlay span {
+            font-size: 0.65rem;
+            color: rgba(58, 53, 48, 0.5);
+        }
+
+        /* Full-width showcase */
+        .showcase-full {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .showcase-item {
+            margin-bottom: 4rem;
+        }
+
+        .showcase-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.35);
+            border: 1px solid rgba(58, 53, 48, 0.08);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-img .work-card-placeholder {
+            color: rgba(58, 53, 48, 0.2);
+        }
+
+        /* Abstract pattern inside placeholder */
+        .showcase-img .abstract {
+            position: absolute;
+            inset: 0;
+            opacity: 0.06;
+        }
+
+        .showcase-img .abstract svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .showcase-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .showcase-title {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 1.1rem;
+            color: #3a3530;
+        }
+
+        .showcase-tag {
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(58, 53, 48, 0.35);
+            border: 1px solid rgba(58, 53, 48, 0.12);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+        }
+
+        /* Contact footer */
+        .im-footer {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .page-think .im-footer { background: #c8d5c0; }
+        .page-lead .im-footer { background: #d5dde6; }
+        .page-create .im-footer { background: #e8e4de; }
+
+        .im-footer p {
+            font-size: 0.85rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            opacity: 0.5;
+        }
+
+        .im-footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .im-footer-links a {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: lowercase;
+            text-decoration: none;
+            color: inherit;
+            opacity: 0.5;
+            border-bottom: 1px solid currentColor;
+            padding-bottom: 2px;
+            transition: opacity 0.3s;
+        }
+
+        .im-footer-links a:hover { opacity: 0.8; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hub-content h1 { font-size: 3.2rem; }
+            .im-hero h2 { font-size: 2.4rem; }
+
+            .im-section-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .im-section-inner > :first-child {
+                order: 0;
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .work-card-wide {
+                grid-column: span 1;
+                aspect-ratio: 4/3;
+            }
+
+            .tags {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tag {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HUB ===== -->
+    <div class="hub" id="hub">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="hub-content">
+            <h1>janice<br>quach</h1>
+            <p class="intro">
+                design lead who builds teams that think for themselves. i care about messy human dynamics, honest feedback, and work that actually matters.
+            </p>
+            <div class="tags">
+                <a class="tag tag-think" onclick="openPage('think')"><span>think</span></a>
+                <a class="tag tag-lead" onclick="openPage('lead')"><span>lead</span></a>
+                <a class="tag tag-create" onclick="openPage('create')"><span>create</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== THINK ===== -->
+    <div class="immersive page-think" id="page-think">
+        <button class="back-btn" onclick="closePage()">← back</button>
+
+        <div class="im-hero">
+            <div class="orb orb-a"></div>
+            <div class="orb orb-b"></div>
+            <div class="im-hero-content">
+                <p class="im-label">think</p>
+                <h2>clarity over cleverness</h2>
+                <p>if it needs explaining, it's not clear enough. i believe in principles that compound — simple rules that make every decision after them easier.</p>
+            </div>
+        </div>
+
+        <div class="im-section think-s1">
+            <div class="im-section-inner">
+                <div>
+                    <h3>structure creates speed</h3>
+                    <p>clear systems reduce friction and compound over time. i don't build processes for process sake — i build them because the right structure means the team spends less time navigating and more time making.</p>
+                    <p>every decision optimises something and sacrifices something. i'd rather say that out loud than pretend we can have it all.</p>
+                </div>
+                <div class="quadrant">
+                    <div class="q-axis q-axis-v"></div>
+                    <div class="q-axis q-axis-h"></div>
+                    <span class="q-label q-label-t">clarity</span>
+                    <span class="q-label q-label-b">complexity</span>
+                    <span class="q-label q-label-l">speed</span>
+                    <span class="q-label q-label-r">craft</span>
+                    <div class="q-zone" style="width: 120px; height: 100px; top: 15%; left: 35%; border-color: rgba(74,103,65,0.12);"></div>
+                    <div class="q-dot" style="top: 25%; left: 58%;"></div>
+                    <span class="q-dot-label" style="top: 19%; left: 63%;">structure</span>
+                    <div class="q-dot" style="top: 22%; left: 45%;"></div>
+                    <span class="q-dot-label" style="top: 15%; left: 33%;">intent</span>
+                    <div class="q-dot" style="top: 32%; left: 65%;"></div>
+                    <span class="q-dot-label" style="top: 26%; left: 70%;">reuse</span>
+                    <div class="q-dot" style="top: 38%; left: 48%;"></div>
+                    <span class="q-dot-label" style="top: 40%; left: 33%;">trade-offs</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="im-section think-s2">
+            <div class="im-section-inner">
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="flow-num">01</div>
+                        <div class="flow-text">name the problem clearly</div>
+                    </div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-step">
+                        <div class="flow-num">02</div>
+                        <div class="flow-text">map the trade-offs out loud</div>
+                    </div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-step">
+                        <div class="flow-num">03</div>
+                        <div class="flow-text">build once, solve at scale</div>
+                    </div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-step">
+                        <div class="flow-num">04</div>
+                        <div class="flow-text">let quality reflect the care</div>
+                    </div>
+                </div>
+                <div>
+                    <h3>build once, reuse often</h3>
+                    <p>solve in ways that scale, not just in ways that ship. the way something is made reflects how much you care about the people using it.</p>
+                    <p>i think in systems. not because systems are elegant, but because the right system means the next person doesn't have to solve the same problem again.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="im-section think-s3">
+            <div class="im-section-inner">
+                <div>
+                    <h3>intentional trade-offs</h3>
+                    <p>every decision optimises something and sacrifices something. the honest thing to do is say it out loud — not hide behind "best practice" or pretend trade-offs don't exist.</p>
+                    <p>i'd rather make a clear decision with known costs than an unclear one that feels safe.</p>
+                </div>
+                <div class="venn">
+                    <div class="venn-circle venn-c1">speed</div>
+                    <div class="venn-circle venn-c2">quality</div>
+                    <div class="venn-circle venn-c3">scale</div>
+                    <div class="venn-center">intent</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="im-footer">
+            <p>want to riff on how things should work?</p>
+            <div class="im-footer-links">
+                <a href="mailto:hello@janicequach.com">email</a>
+                <a href="https://linkedin.com/in/janicequach" target="_blank">linkedin</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== LEAD ===== -->
+    <div class="immersive page-lead" id="page-lead">
+        <button class="back-btn" onclick="closePage()">← back</button>
+
+        <div class="im-hero">
+            <div class="orb orb-a"></div>
+            <div class="orb orb-b"></div>
+            <div class="im-hero-content">
+                <p class="im-label">lead</p>
+                <h2>bring people on the journey</h2>
+                <p>i'd rather my team disagree with me than nod along. shared ownership beats sign-off every time.</p>
+            </div>
+        </div>
+
+        <div class="im-section lead-s1">
+            <div class="im-section-inner">
+                <div class="node-map">
+                    <svg viewBox="0 0 340 340">
+                        <line x1="170" y1="52" x2="280" y2="110" />
+                        <line x1="280" y1="110" x2="280" y2="225" />
+                        <line x1="280" y1="225" x2="170" y2="290" />
+                        <line x1="170" y1="290" x2="60" y2="225" />
+                        <line x1="60" y1="225" x2="60" y2="110" />
+                        <line x1="60" y1="110" x2="170" y2="52" />
+                        <line x1="170" y1="52" x2="170" y2="170" />
+                        <line x1="280" y1="110" x2="170" y2="170" />
+                        <line x1="280" y1="225" x2="170" y2="170" />
+                        <line x1="170" y1="290" x2="170" y2="170" />
+                        <line x1="60" y1="225" x2="170" y2="170" />
+                        <line x1="60" y1="110" x2="170" y2="170" />
+                    </svg>
+                    <div class="nm-node nm-center">shared<br>ownership</div>
+                    <div class="nm-node nm-orbit nm-1">curiosity</div>
+                    <div class="nm-node nm-orbit nm-2">autonomy</div>
+                    <div class="nm-node nm-orbit nm-3">candour</div>
+                    <div class="nm-node nm-orbit nm-4">growth</div>
+                    <div class="nm-node nm-orbit nm-5">riffing</div>
+                    <div class="nm-node nm-orbit nm-6">trust</div>
+                </div>
+                <div>
+                    <h3>contribution over presence</h3>
+                    <p>i want us to riff, build, disagree, explore and come out with something better than any of us could've made alone.</p>
+                    <p>what frustrates me most is when people don't bring their own thinking to the table. if i have to steer every decision or inject every idea, it stops being a team and starts being a funnel.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="im-section lead-s2">
+            <div class="im-section-inner">
+                <div>
+                    <h3>the gap between knowing and doing</h3>
+                    <p>everyone nods when you name the pattern. the hard part is what happens next. i care about closing that gap — turning frameworks into actual behaviour change, not just shared language.</p>
+                    <p>awareness is not the same as action. i've run workshops where the whole room has the aha moment, and then nothing changes. that's the problem i keep coming back to.</p>
+                </div>
+                <div class="spectrums">
+                    <div class="spec-row">
+                        <div class="spec-labels"><span>awareness</span><span>action</span></div>
+                        <div class="spec-track"><div class="spec-dot" style="left: 75%;"></div></div>
+                    </div>
+                    <div class="spec-row">
+                        <div class="spec-labels"><span>buy-in</span><span>co-creation</span></div>
+                        <div class="spec-track"><div class="spec-dot" style="left: 85%;"></div></div>
+                    </div>
+                    <div class="spec-row">
+                        <div class="spec-labels"><span>directing</span><span>enabling</span></div>
+                        <div class="spec-track"><div class="spec-dot" style="left: 70%;"></div></div>
+                    </div>
+                    <div class="spec-row">
+                        <div class="spec-labels"><span>safety</span><span>challenge</span></div>
+                        <div class="spec-track"><div class="spec-dot" style="left: 60%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="im-section lead-s3">
+            <div class="im-section-inner">
+                <div class="tree-diagram">
+                    <div class="tree-node">strategic pivots</div>
+                    <div class="tree-trunk"></div>
+                    <div class="tree-node">new directions · goals</div>
+                    <div class="tree-trunk"></div>
+                    <div class="tree-branch">
+                        <div class="tree-leaf">execution</div>
+                        <div class="tree-leaf">tools</div>
+                        <div class="tree-leaf">iterations</div>
+                    </div>
+                </div>
+                <div>
+                    <h3>decisions like a tree</h3>
+                    <p>some decisions are leaves — you make them. some are branches — bring them to me. some are the trunk — i get final say. knowing which is which is how autonomy works without chaos.</p>
+                    <p>when to escalate: only after you've explored the options. show me what you've tried, not just what you're stuck on.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="im-footer">
+            <p>interested in how i build teams?</p>
+            <div class="im-footer-links">
+                <a href="mailto:hello@janicequach.com">email</a>
+                <a href="https://linkedin.com/in/janicequach" target="_blank">linkedin</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CREATE ===== -->
+    <div class="immersive page-create" id="page-create">
+        <button class="back-btn" onclick="closePage()">← back</button>
+
+        <div class="im-hero">
+            <div class="orb orb-a"></div>
+            <div class="orb orb-b"></div>
+            <div class="im-hero-content">
+                <p class="im-label">create</p>
+                <h2>design is how it works</h2>
+                <p>i'm a visual thinker. i turn complex ideas into clear interfaces, diagrams, and systems that people actually understand.</p>
+            </div>
+        </div>
+
+        <div class="im-section create-s1">
+            <div class="showcase-full">
+                <div class="showcase-item">
+                    <div class="showcase-img">
+                        <div class="abstract">
+                            <svg viewBox="0 0 800 450">
+                                <circle cx="200" cy="225" r="80" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                                <circle cx="350" cy="200" r="60" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                                <line x1="280" y1="225" x2="290" y2="200" stroke="#3a3530" stroke-width="0.5"/>
+                                <circle cx="550" cy="250" r="100" fill="none" stroke="#3a3530" stroke-width="0.3"/>
+                                <rect x="500" y="180" width="100" height="60" rx="4" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                            </svg>
+                        </div>
+                        <span class="work-card-placeholder">your work here</span>
+                    </div>
+                    <div class="showcase-meta">
+                        <span class="showcase-title">design systems</span>
+                        <span class="showcase-tag">ui · systems</span>
+                    </div>
+                </div>
+
+                <div class="showcase-item">
+                    <div class="showcase-img">
+                        <div class="abstract">
+                            <svg viewBox="0 0 800 450">
+                                <rect x="100" y="80" width="180" height="120" rx="8" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                                <rect x="320" y="120" width="180" height="120" rx="8" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                                <rect x="540" y="160" width="180" height="120" rx="8" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                                <line x1="280" y1="140" x2="320" y2="180" stroke="#3a3530" stroke-width="0.3" stroke-dasharray="4"/>
+                                <line x1="500" y1="180" x2="540" y2="220" stroke="#3a3530" stroke-width="0.3" stroke-dasharray="4"/>
+                            </svg>
+                        </div>
+                        <span class="work-card-placeholder">your work here</span>
+                    </div>
+                    <div class="showcase-meta">
+                        <span class="showcase-title">product interfaces</span>
+                        <span class="showcase-tag">ui · product</span>
+                    </div>
+                </div>
+
+                <div class="showcase-item">
+                    <div class="showcase-img">
+                        <div class="abstract">
+                            <svg viewBox="0 0 800 450">
+                                <circle cx="400" cy="225" r="120" fill="none" stroke="#3a3530" stroke-width="0.3"/>
+                                <circle cx="400" cy="225" r="80" fill="none" stroke="#3a3530" stroke-width="0.3"/>
+                                <circle cx="400" cy="225" r="40" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                                <line x1="400" y1="105" x2="400" y2="345" stroke="#3a3530" stroke-width="0.3"/>
+                                <line x1="280" y1="225" x2="520" y2="225" stroke="#3a3530" stroke-width="0.3"/>
+                            </svg>
+                        </div>
+                        <span class="work-card-placeholder">your work here</span>
+                    </div>
+                    <div class="showcase-meta">
+                        <span class="showcase-title">workshop visuals</span>
+                        <span class="showcase-tag">visual · facilitation</span>
+                    </div>
+                </div>
+
+                <div class="showcase-item">
+                    <div class="showcase-img">
+                        <div class="abstract">
+                            <svg viewBox="0 0 800 450">
+                                <rect x="80" y="100" width="140" height="200" rx="6" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                                <rect x="260" y="100" width="140" height="200" rx="6" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                                <rect x="440" y="100" width="140" height="200" rx="6" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                                <rect x="620" y="100" width="140" height="200" rx="6" fill="none" stroke="#3a3530" stroke-width="0.5"/>
+                            </svg>
+                        </div>
+                        <span class="work-card-placeholder">your work here</span>
+                    </div>
+                    <div class="showcase-meta">
+                        <span class="showcase-title">graphic design</span>
+                        <span class="showcase-tag">visual · brand</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="im-section create-s2">
+            <div class="im-section-inner">
+                <div>
+                    <h3>visual thinking</h3>
+                    <p>i think in diagrams, frameworks, and spatial relationships. when something is complex, my instinct is to draw it — not explain it. the visual representation often reveals what words hide.</p>
+                    <p>the best interfaces feel obvious. not because they're simple, but because someone cared enough to make the complexity invisible.</p>
+                </div>
+                <div class="work-grid">
+                    <div class="work-card">
+                        <span class="work-card-placeholder">diagram</span>
+                    </div>
+                    <div class="work-card">
+                        <span class="work-card-placeholder">framework</span>
+                    </div>
+                    <div class="work-card-wide work-card">
+                        <span class="work-card-placeholder">system overview</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="im-footer">
+            <p>want to see more or collaborate?</p>
+            <div class="im-footer-links">
+                <a href="mailto:hello@janicequach.com">email</a>
+                <a href="https://linkedin.com/in/janicequach" target="_blank">linkedin</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPage(page) {
+            document.getElementById('hub').classList.add('hidden');
+            document.getElementById('page-' + page).classList.add('active');
+            document.getElementById('page-' + page).scrollTop = 0;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePage() {
+            document.querySelectorAll('.immersive').forEach(el => el.classList.remove('active'));
+            document.getElementById('hub').classList.remove('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Close with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closePage();
+        });
+    </script>
+
+</body>
+</html>
