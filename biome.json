@@ -1,9 +1,26 @@
 {
-    "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
-    "organizeImports": { "enabled": true },
+    "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
+    "assist": { "actions": { "source": { "organizeImports": "on" } } },
     "linter": {
         "enabled": true,
-        "rules": { "recommended": true }
+        "rules": {
+            "recommended": true,
+            "complexity": {
+                "noExcessiveCognitiveComplexity": "warn"
+            },
+            "style": {
+                "noNonNullAssertion": "error",
+                "useConst": "error",
+                "useConsistentArrayType": { "level": "error", "options": { "syntax": "shorthand" } }
+            },
+            "suspicious": {
+                "noExplicitAny": "error"
+            },
+            "correctness": {
+                "noUnusedImports": "off",
+                "noUnusedVariables": "off"
+            }
+        }
     },
     "formatter": {
         "enabled": true,
@@ -11,8 +28,17 @@
         "indentWidth": 4,
         "lineWidth": 120
     },
+    "css": {
+        "formatter": {
+            "enabled": true,
+            "indentStyle": "space",
+            "indentWidth": 4
+        },
+        "linter": {
+            "enabled": true
+        }
+    },
     "files": {
-        "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.astro", "*.mjs"],
-        "ignore": ["node_modules", "dist", ".astro"]
+        "includes": ["**/src/**/*.ts", "**/src/**/*.js", "**/src/**/*.astro", "**/src/**/*.css", "**/*.mjs", "!**/node_modules", "!**/dist", "!**/.astro"]
     }
 }
