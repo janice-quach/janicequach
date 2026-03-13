@@ -45,8 +45,8 @@
 
 <style>
     .morph-svg {
-        width: 380px;
-        height: 380px;
+        width: min(70vw, 70vh);
+        height: min(70vw, 70vh);
         position: relative;
         z-index: 1;
     }
@@ -68,7 +68,7 @@
     }
 
     @media (max-width: 900px) {
-        .morph-svg { width: 280px; height: 280px; }
+        .morph-svg { width: min(85vw, 50vh); height: min(85vw, 50vh); }
     }
 </style>
 
@@ -152,7 +152,7 @@
     }
 
     function getProgress() {
-        const sections = document.querySelectorAll('.text-section');
+        const sections = document.querySelectorAll('.scroll-section');
         const total = (sections.length - 1) * window.innerHeight;
         return Math.max(0, Math.min(1, window.scrollY / total)) * (sections.length - 1);
     }
@@ -166,7 +166,7 @@
     const centerLabelEl = document.getElementById('center-label')!;
     const gridLines = document.querySelectorAll('.grid-line');
     const bgLayer = document.getElementById('bgLayer')!;
-    const textSections = document.querySelectorAll('.text-section');
+    const textSections = document.querySelectorAll('.scroll-section');
     const svg = document.getElementById('morphSvg')!;
 
     let cachedRect: DOMRect | null = null;
