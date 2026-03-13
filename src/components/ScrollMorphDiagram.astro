@@ -169,6 +169,24 @@
     const textSections = document.querySelectorAll('.text-section');
     const svg = document.getElementById('morphSvg')!;
 
+    let cachedRect: DOMRect | null = null;
+    function getSvgScale(): [number, number] {
+        if (!cachedRect) cachedRect = svg.getBoundingClientRect();
+        return [cachedRect.width / 380, cachedRect.height / 380];
+    }
+    window.addEventListener('resize', () => { cachedRect = null; });
+
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+                update();
+                ticking = false;
+            });
+        }
+    }
+
     function update() {
         const progress = getProgress();
         const si = Math.min(Math.floor(progress), 4);
@@ -222,8 +240,7 @@
         else if (from.centerLabel) { centerLabelEl.textContent = from.centerLabel; centerLabelEl.setAttribute('opacity',String(1-t)); }
         else { centerLabelEl.setAttribute('opacity','0'); }
 
-        const rect = svg.getBoundingClientRect();
-        const sx = rect.width/380; const sy = rect.height/380;
+        const [sx, sy] = getSvgScale();
         for (let i = 0; i < 5; i++) {
             const fl = from.labels.find(l=>l.id===i); const tl = to.labels.find(l=>l.id===i);
             if (tl?.text) {
@@ -253,9 +270,8 @@
             const d = Math.abs(progress-i);
             (sec as HTMLElement).style.opacity = String(d<0.5?1:Math.max(0.15,1-(d-0.5)*1.5));
         });
-
-        requestAnimationFrame(update);
     }
 
-    requestAnimationFrame(update);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
 </script>
