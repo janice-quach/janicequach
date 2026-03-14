@@ -232,7 +232,8 @@
 
     function getProgress() {
         const sections = document.querySelectorAll('.scroll-section');
-        const total = (sections.length - 1) * window.innerHeight;
+        const sectionHeight = (sections[0] as HTMLElement).offsetHeight;
+        const total = (sections.length - 1) * sectionHeight;
         return Math.max(0, Math.min(1, window.scrollY / total)) * (sections.length - 1);
     }
 
@@ -333,32 +334,67 @@
         const go = lerp(from.gridOpacity,to.gridOpacity,t);
         gridLines.forEach(l => l.setAttribute('stroke',`rgba(58,53,48,${0.08*go})`));
 
-        if (to.centerLabel) { centerLabelEl.textContent = to.centerLabel; centerLabelEl.setAttribute('opacity',String(t)); }
+        if (from.centerLabel && to.centerLabel) { centerLabelEl.textContent = to.centerLabel; centerLabelEl.setAttribute('opacity','1'); }
+        else if (to.centerLabel) { centerLabelEl.textContent = to.centerLabel; centerLabelEl.setAttribute('opacity',String(t)); }
         else if (from.centerLabel) { centerLabelEl.textContent = from.centerLabel; centerLabelEl.setAttribute('opacity',String(1-t)); }
         else { centerLabelEl.setAttribute('opacity','0'); }
 
         // Labels
         const [sx, sy] = getSvgScale();
         for (let i = 0; i < 5; i++) {
-            const fl = from.labels.find(l=>l.id===i); const tl = to.labels.find(l=>l.id===i);
-            if (tl?.text) {
-                lbls[i].textContent = tl.text;
-                lbls[i].style.left = `${lerp(fl?.x??tl.x,tl.x,t)*sx}px`;
-                lbls[i].style.top = `${lerp(fl?.y??tl.y,tl.y,t)*sy}px`;
+            const fl = from.labels.find(l=>l.id===i);
+            const tl = to.labels.find(l=>l.id===i);
+            const hasFrom = fl?.text;
+            const hasTo = tl?.text;
+            if (hasFrom && hasTo) {
+                // Both states have this label — crossfade text, interpolate position
+                lbls[i].textContent = t < 0.5 ? fl.text : tl.text;
+                lbls[i].style.left = `${lerp(fl.x, tl.x, t) * sx}px`;
+                lbls[i].style.top = `${lerp(fl.y, tl.y, t) * sy}px`;
                 lbls[i].classList.remove('hidden');
-                lbls[i].style.opacity = String(fl?.text ? 1 : t);
-            } else if (fl?.text) {
+                lbls[i].style.opacity = '1';
+            } else if (hasFrom) {
                 lbls[i].textContent = fl.text;
-                lbls[i].style.left = `${fl.x*sx}px`; lbls[i].style.top = `${fl.y*sy}px`;
-                lbls[i].style.opacity = String(1-t);
-                if (t > 0.8) lbls[i].classList.add('hidden');
-            } else { lbls[i].classList.add('hidden'); }
+                lbls[i].style.left = `${fl.x * sx}px`;
+                lbls[i].style.top = `${fl.y * sy}px`;
+                lbls[i].classList.remove('hidden');
+                lbls[i].style.opacity = String(1 - t);
+                if (t > 0.95) lbls[i].classList.add('hidden');
+            } else if (hasTo) {
+                lbls[i].textContent = tl.text;
+                lbls[i].style.left = `${tl.x * sx}px`;
+                lbls[i].style.top = `${tl.y * sy}px`;
+                lbls[i].classList.remove('hidden');
+                lbls[i].style.opacity = String(t);
+            } else {
+                lbls[i].classList.add('hidden');
+                lbls[i].style.opacity = '0';
+            }
         }
-        ['t','b','l','r'].forEach((id,idx) => {
-            const fa = from.axisLabels.find(l=>l.id===id); const ta = to.axisLabels.find(l=>l.id===id);
-            if (ta) { axisLbls[idx].textContent=ta.text; axisLbls[idx].style.left=`${ta.x*sx}px`; axisLbls[idx].style.top=`${ta.y*sy}px`; axisLbls[idx].classList.remove('hidden'); axisLbls[idx].style.opacity=String(fa?1:t); }
-            else if (fa) { axisLbls[idx].style.opacity=String(1-t); if(t>0.8)axisLbls[idx].classList.add('hidden'); }
-            else { axisLbls[idx].classList.add('hidden'); }
+        ['t','b','l','r'].forEach((id, idx) => {
+            const fa = from.axisLabels.find(l=>l.id===id);
+            const ta = to.axisLabels.find(l=>l.id===id);
+            const hasFrom = !!fa;
+            const hasTo = !!ta;
+            if (hasFrom && hasTo) {
+                axisLbls[idx].textContent = ta.text;
+                axisLbls[idx].style.left = `${ta.x * sx}px`;
+                axisLbls[idx].style.top = `${ta.y * sy}px`;
+                axisLbls[idx].classList.remove('hidden');
+                axisLbls[idx].style.opacity = '1';
+            } else if (hasFrom) {
+                axisLbls[idx].style.opacity = String(1 - t);
+                if (t > 0.95) axisLbls[idx].classList.add('hidden');
+            } else if (hasTo) {
+                axisLbls[idx].textContent = ta.text;
+                axisLbls[idx].style.left = `${ta.x * sx}px`;
+                axisLbls[idx].style.top = `${ta.y * sy}px`;
+                axisLbls[idx].classList.remove('hidden');
+                axisLbls[idx].style.opacity = String(t);
+            } else {
+                axisLbls[idx].classList.add('hidden');
+                axisLbls[idx].style.opacity = '0';
+            }
         });
 
         // Background

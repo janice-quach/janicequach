@@ -133,7 +133,7 @@ import Base from "../layouts/Base.astro";
     }
 
     .scroll-section {
-        height: 100vh;
+        height: 150vh;
     }
 
     @media (max-width: 900px) {
@@ -186,8 +186,9 @@ import Base from "../layouts/Base.astro";
     let ticking = false;
 
     function getActiveSection(): number {
-        const vh = window.innerHeight;
-        return Math.min(Math.round(window.scrollY / vh), textData.length - 1);
+        const section = document.querySelector('.scroll-section') as HTMLElement;
+        const sectionHeight = section.offsetHeight;
+        return Math.min(Math.round(window.scrollY / sectionHeight), textData.length - 1);
     }
 
     function onScroll() {
