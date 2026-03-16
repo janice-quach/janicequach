@@ -1,0 +1,352 @@
+---
+// Scroll-linked morphing SVG diagram for the Lead page.
+// 7 dots morph through states: scattered → hexagon → spectrum → tree → convergence.
+// All animation is vanilla JS — no framework needed.
+---
+<div style="position: relative;">
+    <svg class="morph-svg" viewBox="0 0 380 380" id="leadMorphSvg">
+        <g id="lead-connections">
+            <line id="lc-0"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-1"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-2"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-3"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-4"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-5"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-6"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-7"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-8"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-9"  stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-10" stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-11" stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-12" stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-13" stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-14" stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+            <line id="lc-15" stroke="rgba(30,55,90,0.1)" stroke-width="1.5"/>
+        </g>
+        <!-- Spectrum track lines (state 2) -->
+        <path id="lead-tracks" d="" fill="none" stroke="rgba(30,55,90,0.12)" stroke-width="1"/>
+        <!-- Zone circle (tree frame / convergence) -->
+        <circle id="lead-zone" cx="190" cy="190" r="0" fill="none" stroke="rgba(30,55,90,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <circle id="ld-0" r="8" fill="#4a6880" opacity="0.9"/>
+        <circle id="ld-1" r="7" fill="#4a6880" opacity="0.9"/>
+        <circle id="ld-2" r="7" fill="#4a6880" opacity="0.9"/>
+        <circle id="ld-3" r="7" fill="#4a6880" opacity="0.9"/>
+        <circle id="ld-4" r="7" fill="#4a6880" opacity="0.9"/>
+        <circle id="ld-5" r="7" fill="#4a6880" opacity="0.9"/>
+        <circle id="ld-6" r="7" fill="#4a6880" opacity="0.9"/>
+        <text id="lead-center-label" x="190" y="195" text-anchor="middle" font-size="9" letter-spacing="2" fill="rgba(30,55,90,0.35)" font-family="Inter, sans-serif" opacity="0"></text>
+    </svg>
+    <div id="lead-labels-container" style="position:absolute;inset:0;pointer-events:none;">
+        <span class="ld-label hidden" id="ldlbl-0"></span>
+        <span class="ld-label hidden" id="ldlbl-1"></span>
+        <span class="ld-label hidden" id="ldlbl-2"></span>
+        <span class="ld-label hidden" id="ldlbl-3"></span>
+        <span class="ld-label hidden" id="ldlbl-4"></span>
+        <span class="ld-label hidden" id="ldlbl-5"></span>
+        <span class="ld-label hidden" id="ldlbl-6"></span>
+        <!-- Spectrum track endpoint labels (state 2) -->
+        <span class="ld-label ld-spec hidden" id="ldspec-0"></span>
+        <span class="ld-label ld-spec hidden" id="ldspec-1"></span>
+        <span class="ld-label ld-spec hidden" id="ldspec-2"></span>
+        <span class="ld-label ld-spec hidden" id="ldspec-3"></span>
+        <span class="ld-label ld-spec hidden" id="ldspec-4"></span>
+        <span class="ld-label ld-spec hidden" id="ldspec-5"></span>
+        <span class="ld-label ld-spec hidden" id="ldspec-6"></span>
+        <span class="ld-label ld-spec hidden" id="ldspec-7"></span>
+    </div>
+</div>
+
+<style>
+    .morph-svg {
+        width: min(70vw, 70vh);
+        height: min(70vw, 70vh);
+        position: relative;
+        z-index: 1;
+    }
+
+    .ld-label {
+        position: absolute;
+        font-size: 0.55rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(30, 55, 90, 0.4);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .ld-label.hidden {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    @media (max-width: 900px) {
+        .morph-svg { width: min(85vw, 50vh); height: min(85vw, 50vh); }
+    }
+</style>
+
+<script>
+    // connMap: 16 pairs covering hexagon (center-to-each + ring) + tree links
+    const connMap: [number, number][] = [
+        [0,1],[0,2],[0,3],[0,4],[0,5],[0,6],  // center to each outer
+        [1,2],[2,3],[3,4],[4,5],[5,6],[6,1],  // hex ring
+        [1,3],[1,4],[2,4],[2,5]               // tree links
+    ];
+
+    const states: Record<number, {
+        dots: [number, number][];
+        radii: number[];
+        labels: { id: number; text: string; x: number; y: number }[];
+        connections: [number, number][];
+        trackOpacity: number;
+        specLabels: { id: number; text: string; x: number; y: number }[];
+        zoneR: number;
+        centerLabel: string;
+        bg: string;
+    }> = {
+        // State 0: single large center dot, 6 scattered smaller dots — leader alone, team not connected
+        0: {
+            dots: [[190,190],[80,90],[305,70],[325,275],[65,295],[280,340],[135,255]],
+            radii: [14, 5, 5, 5, 5, 5, 5],
+            labels: [], connections: [],
+            trackOpacity: 0, specLabels: [],
+            zoneR: 0, centerLabel: '', bg: '#d5dde6'
+        },
+        // State 1: hexagonal orbit — team connected to centre and to each other
+        1: {
+            dots: [[190,190],[300,190],[245,285],[135,285],[80,190],[135,95],[245,95]],
+            radii: [8, 7, 7, 7, 7, 7, 7],
+            labels: [
+                { id: 1, text: 'riffing',   x: 310, y: 188 },
+                { id: 2, text: 'trust',     x: 252, y: 290 },
+                { id: 3, text: 'growth',    x: 90,  y: 290 },
+                { id: 4, text: 'candour',   x: 40,  y: 188 },
+                { id: 5, text: 'autonomy',  x: 90,  y: 82  },
+                { id: 6, text: 'curiosity', x: 252, y: 82  }
+            ],
+            connections: [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]],
+            trackOpacity: 0, specLabels: [],
+            zoneR: 0, centerLabel: 'shared ownership', bg: '#cdd6e0'
+        },
+        // State 2: spectrum lines — 4 horizontal tracks showing leadership tensions
+        2: {
+            dots: [[240,102],[250,168],[235,233],[245,298],[190,190],[190,190],[190,190]],
+            radii: [7, 7, 7, 7, 5, 5, 5],
+            labels: [], connections: [],
+            trackOpacity: 1,
+            specLabels: [
+                { id: 0, text: 'awareness',   x: 30,  y: 95  },
+                { id: 1, text: 'action',      x: 262, y: 95  },
+                { id: 2, text: 'directing',   x: 30,  y: 161 },
+                { id: 3, text: 'enabling',    x: 262, y: 161 },
+                { id: 4, text: 'buy-in',      x: 30,  y: 226 },
+                { id: 5, text: 'co-creation', x: 240, y: 226 },
+                { id: 6, text: 'safety',      x: 30,  y: 291 },
+                { id: 7, text: 'challenge',   x: 262, y: 291 }
+            ],
+            zoneR: 0, centerLabel: '', bg: '#c8d1dc'
+        },
+        // State 3: tree — decision hierarchy (trunk → branches → leaves)
+        3: {
+            dots: [[190,55],[120,165],[260,165],[65,285],[175,285],[310,285],[190,190]],
+            radii: [8, 7, 7, 6, 6, 6, 4],
+            labels: [
+                { id: 0, text: 'strategic pivots', x: 150, y: 43 },
+                { id: 1, text: 'new directions',   x: 45,  y: 155 },
+                { id: 2, text: 'goals',            x: 272, y: 155 },
+                { id: 3, text: 'execution',        x: 20,  y: 292 },
+                { id: 4, text: 'tools',            x: 185, y: 292 },
+                { id: 5, text: 'iterations',       x: 316, y: 278 }
+            ],
+            connections: [[0,1],[0,2],[1,3],[1,4],[2,4],[2,5]],
+            trackOpacity: 0, specLabels: [],
+            zoneR: 0, centerLabel: '', bg: '#c2ccd8'
+        },
+        // State 4: convergence — alignment, all as one
+        4: {
+            dots: [[190,190],[190,190],[190,190],[190,190],[190,190],[190,190],[190,190]],
+            radii: [5, 5, 5, 5, 5, 5, 5],
+            labels: [], connections: [],
+            trackOpacity: 0, specLabels: [],
+            zoneR: 110, centerLabel: 'inception', bg: '#bdc7d3'
+        }
+    };
+
+    function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
+    function ease(t: number) { return t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2; }
+
+    function hexToRgb(hex: string) {
+        const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return r ? { r: parseInt(r[1],16), g: parseInt(r[2],16), b: parseInt(r[3],16) } : { r:0, g:0, b:0 };
+    }
+
+    function getProgress() {
+        const sections = document.querySelectorAll('.lead-scroll-section');
+        if (!sections.length) return 0;
+        const sectionHeight = (sections[0] as HTMLElement).offsetHeight;
+        const total = (sections.length - 1) * sectionHeight;
+        return Math.max(0, Math.min(1, window.scrollY / total)) * (sections.length - 1);
+    }
+
+    const dots = [0,1,2,3,4,5,6].map(i => document.getElementById(`ld-${i}`)!);
+    const lbls = [0,1,2,3,4,5,6].map(i => document.getElementById(`ldlbl-${i}`)!);
+    const specLbls = [0,1,2,3,4,5,6,7].map(i => document.getElementById(`ldspec-${i}`)!);
+    const connLines = connMap.map((_,i) => document.getElementById(`lc-${i}`)! as unknown as SVGLineElement);
+    const tracksEl = document.getElementById('lead-tracks')!;
+    const zoneEl = document.getElementById('lead-zone')!;
+    const centerLabelEl = document.getElementById('lead-center-label')!;
+    const bgLayer = document.getElementById('bgLayer')!;
+    const svg = document.getElementById('leadMorphSvg')!;
+
+    let cachedRect: DOMRect | null = null;
+    function getSvgScale(): [number, number] {
+        if (!cachedRect) cachedRect = svg.getBoundingClientRect();
+        return [cachedRect.width / 380, cachedRect.height / 380];
+    }
+    window.addEventListener('resize', () => { cachedRect = null; });
+
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => { update(); ticking = false; });
+        }
+    }
+
+    function update() {
+        const progress = getProgress();
+        const si = Math.min(Math.floor(progress), 4);
+        const t = ease(progress - si);
+        const from = states[si];
+        const to = states[Math.min(si + 1, 4)];
+
+        // Dots — position + radius
+        for (let i = 0; i < 7; i++) {
+            const x = lerp(from.dots[i][0], to.dots[i][0], t);
+            const y = lerp(from.dots[i][1], to.dots[i][1], t);
+            const r = lerp(from.radii[i], to.radii[i], t);
+            dots[i].setAttribute('cx', String(x));
+            dots[i].setAttribute('cy', String(y));
+            dots[i].setAttribute('r', String(r));
+        }
+
+        const cd = from.dots.map((d,i) => [lerp(d[0],to.dots[i][0],t), lerp(d[1],to.dots[i][1],t)]);
+
+        // Connections
+        connMap.forEach((pair, idx) => {
+            const fa = from.connections.some(c => c[0]===pair[0]&&c[1]===pair[1]);
+            const ta = to.connections.some(c => c[0]===pair[0]&&c[1]===pair[1]);
+            let op = 0;
+            if (fa && ta) op = 0.12;
+            else if (fa) op = lerp(0.12, 0, t);
+            else if (ta) op = lerp(0, 0.12, t);
+            connLines[idx].setAttribute('x1', String(cd[pair[0]][0]));
+            connLines[idx].setAttribute('y1', String(cd[pair[0]][1]));
+            connLines[idx].setAttribute('x2', String(cd[pair[1]][0]));
+            connLines[idx].setAttribute('y2', String(cd[pair[1]][1]));
+            connLines[idx].setAttribute('stroke', `rgba(30,55,90,${op})`);
+        });
+
+        // Spectrum tracks
+        const trackOp = lerp(from.trackOpacity, to.trackOpacity, t);
+        if (trackOp > 0.01) {
+            tracksEl.setAttribute('d', 'M60,102 L320,102 M60,168 L320,168 M60,233 L320,233 M60,298 L320,298');
+            tracksEl.setAttribute('stroke', `rgba(30,55,90,${0.12 * trackOp})`);
+        } else {
+            tracksEl.setAttribute('d', '');
+        }
+
+        // Zone circle (convergence)
+        const zR = lerp(from.zoneR, to.zoneR, t);
+        zoneEl.setAttribute('r', String(zR));
+        zoneEl.setAttribute('stroke', `rgba(30,55,90,${zR > 0 ? 0.1 : 0})`);
+
+        // Center label
+        if (from.centerLabel && to.centerLabel) {
+            centerLabelEl.textContent = to.centerLabel;
+            centerLabelEl.setAttribute('opacity', '1');
+        } else if (to.centerLabel) {
+            centerLabelEl.textContent = to.centerLabel;
+            centerLabelEl.setAttribute('opacity', String(t));
+        } else if (from.centerLabel) {
+            centerLabelEl.textContent = from.centerLabel;
+            centerLabelEl.setAttribute('opacity', String(1 - t));
+        } else {
+            centerLabelEl.setAttribute('opacity', '0');
+        }
+
+        const [sx, sy] = getSvgScale();
+
+        // Dot labels
+        for (let i = 0; i < 7; i++) {
+            const fl = from.labels.find(l => l.id === i);
+            const tl = to.labels.find(l => l.id === i);
+            const hasFrom = fl?.text;
+            const hasTo = tl?.text;
+            if (hasFrom && hasTo) {
+                lbls[i].textContent = t < 0.5 ? fl.text : tl.text;
+                lbls[i].style.left = `${lerp(fl.x, tl.x, t) * sx}px`;
+                lbls[i].style.top = `${lerp(fl.y, tl.y, t) * sy}px`;
+                lbls[i].classList.remove('hidden');
+                lbls[i].style.opacity = '1';
+            } else if (hasFrom) {
+                lbls[i].textContent = fl.text;
+                lbls[i].style.left = `${fl.x * sx}px`;
+                lbls[i].style.top = `${fl.y * sy}px`;
+                lbls[i].classList.remove('hidden');
+                lbls[i].style.opacity = String(1 - t);
+                if (t > 0.95) lbls[i].classList.add('hidden');
+            } else if (hasTo) {
+                lbls[i].textContent = tl.text;
+                lbls[i].style.left = `${tl.x * sx}px`;
+                lbls[i].style.top = `${tl.y * sy}px`;
+                lbls[i].classList.remove('hidden');
+                lbls[i].style.opacity = String(t);
+            } else {
+                lbls[i].classList.add('hidden');
+                lbls[i].style.opacity = '0';
+            }
+        }
+
+        // Spectrum labels
+        const fromSpec = from.specLabels;
+        const toSpec = to.specLabels;
+        for (let i = 0; i < 8; i++) {
+            const fsl = fromSpec.find(l => l.id === i);
+            const tsl = toSpec.find(l => l.id === i);
+            if (fsl && tsl) {
+                specLbls[i].textContent = tsl.text;
+                specLbls[i].style.left = `${lerp(fsl.x, tsl.x, t) * sx}px`;
+                specLbls[i].style.top = `${lerp(fsl.y, tsl.y, t) * sy}px`;
+                specLbls[i].classList.remove('hidden');
+                specLbls[i].style.opacity = '1';
+            } else if (fsl) {
+                specLbls[i].textContent = fsl.text;
+                specLbls[i].style.left = `${fsl.x * sx}px`;
+                specLbls[i].style.top = `${fsl.y * sy}px`;
+                specLbls[i].classList.remove('hidden');
+                specLbls[i].style.opacity = String(1 - t);
+                if (t > 0.95) specLbls[i].classList.add('hidden');
+            } else if (tsl) {
+                specLbls[i].textContent = tsl.text;
+                specLbls[i].style.left = `${tsl.x * sx}px`;
+                specLbls[i].style.top = `${tsl.y * sy}px`;
+                specLbls[i].classList.remove('hidden');
+                specLbls[i].style.opacity = String(t);
+            } else {
+                specLbls[i].classList.add('hidden');
+                specLbls[i].style.opacity = '0';
+            }
+        }
+
+        // Background
+        const fb = hexToRgb(from.bg);
+        const tb = hexToRgb(to.bg);
+        if (bgLayer) {
+            bgLayer.style.background = `rgb(${Math.round(lerp(fb.r,tb.r,t))},${Math.round(lerp(fb.g,tb.g,t))},${Math.round(lerp(fb.b,tb.b,t))})`;
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+</script>

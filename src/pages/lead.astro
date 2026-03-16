@@ -1,81 +1,229 @@
 ---
+import LeadMorphDiagram from "../components/LeadMorphDiagram.astro";
 import PageFooter from "../components/PageFooter.astro";
 import Base from "../layouts/Base.astro";
 ---
 <Base title="lead — janice quach" description="Bring people on the journey. How Janice Quach builds teams that think for themselves.">
+    <div class="bg-layer" id="bgLayer"></div>
     <a class="back-btn" href="/">← back</a>
-    <section class="hero">
+
+    <!-- Fixed diagram in viewport centre -->
+    <div class="diagram-fixed" id="diagramFixed">
         <div class="orb orb-a"></div>
         <div class="orb orb-b"></div>
-        <div class="hero-content">
-            <p class="label">lead</p>
-            <h2>Bring people on the journey</h2>
-            <p class="sub">I went from being the only designer to leading a team of 8 inside a product org. Most of what I've learned about leadership, I figured out by doing it — and I'm still figuring it out.</p>
-        </div>
-    </section>
-    <section class="wip">
-        <p>This page is being designed.</p>
-        <p>The scroll-morphing diagram for this section will visualise team dynamics — nodes connecting, autonomy expanding, trust building.</p>
-    </section>
+        <LeadMorphDiagram />
+    </div>
+
+    <!-- Fixed text bubble bottom-right -->
+    <div class="text-bubble" id="textBubble">
+        <p class="section-num" id="bubbleNum">lead</p>
+        <h2 id="bubbleHeadline">Bring people on the journey</h2>
+        <p id="bubbleBody">I went from being the only designer to leading a team of 8 inside a product org. Most of what I've learned about leadership, I figured out by doing it — and I'm still figuring it out.</p>
+    </div>
+
+    <!-- Scroll spacers — one per section to drive scroll progress -->
+    <div class="scroll-track">
+        <div class="lead-scroll-section" data-section="0"></div>
+        <div class="lead-scroll-section" data-section="1"></div>
+        <div class="lead-scroll-section" data-section="2"></div>
+        <div class="lead-scroll-section" data-section="3"></div>
+        <div class="lead-scroll-section" data-section="4"></div>
+    </div>
+
     <PageFooter theme="lead" />
 </Base>
 
 <style>
     .back-btn {
-        position: fixed; top: 2rem; left: 2rem; z-index: 200;
-        font-family: 'Inter', sans-serif; font-size: 0.75rem;
-        letter-spacing: 0.15em; text-transform: uppercase;
-        color: rgba(0,0,0,0.4); background: rgba(255,255,255,0.6);
-        backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.08);
-        padding: 0.6rem 1.2rem; border-radius: 30px;
-        text-decoration: none; transition: all 0.3s ease;
+        position: fixed;
+        top: 2rem;
+        left: 2rem;
+        z-index: 200;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(0,0,0,0.4);
+        background: rgba(255,255,255,0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0,0,0,0.08);
+        padding: 0.6rem 1.2rem;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: all 0.3s ease;
     }
-    .back-btn:hover { color: rgba(0,0,0,0.7); background: rgba(255,255,255,0.85); }
 
-    .hero {
-        min-height: 100vh; display: flex; align-items: center;
-        justify-content: center; background: #d5dde6;
-        position: relative; overflow: hidden; padding: 6rem 2rem;
+    .back-btn:hover {
+        color: rgba(0,0,0,0.7);
+        background: rgba(255,255,255,0.85);
+    }
+
+    .bg-layer {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: #d5dde6;
+        will-change: background-color;
+    }
+
+    .diagram-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        pointer-events: none;
+        overflow: hidden;
+        transition: opacity 0.4s ease;
     }
 
     .orb-a {
+        position: absolute;
         width: 500px; height: 500px;
-        background: radial-gradient(circle at 60% 30%, rgba(160, 180, 210, 0.45), transparent 70%);
-        top: -120px; left: -100px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 40%, rgba(130, 160, 200, 0.35), transparent 70%);
+        top: -120px; right: -120px;
     }
 
     .orb-b {
+        position: absolute;
         width: 400px; height: 400px;
-        background: radial-gradient(circle at 40% 60%, rgba(180, 200, 230, 0.3), transparent 70%);
-        bottom: -80px; right: -80px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 60% 60%, rgba(160, 185, 220, 0.25), transparent 70%);
+        bottom: -100px; left: -80px;
     }
 
-    .hero-content {
-        position: relative; z-index: 1; text-align: center; max-width: 600px;
+    .text-bubble {
+        position: fixed;
+        bottom: 3rem;
+        right: 3rem;
+        z-index: 10;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(30, 55, 90, 0.08);
+        border-radius: 20px;
+        padding: 2rem 2.4rem;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
     }
 
-    .label {
-        font-size: 0.65rem; letter-spacing: 0.25em;
-        text-transform: uppercase; color: #2a3545; opacity: 0.4;
-        margin-bottom: 1.5rem;
+    .section-num {
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(30, 55, 90, 0.3);
+        margin-bottom: 1rem;
     }
 
-    .hero h2 {
-        font-size: 3.5rem; line-height: 1.15;
-        margin-bottom: 1.5rem; color: #2a3545;
+    .text-bubble h2 {
+        font-size: 1.8rem;
+        line-height: 1.15;
+        margin-bottom: 0.8rem;
+        color: #1a2d42;
     }
 
-    .sub {
-        font-size: 1.05rem; font-weight: 300; line-height: 1.8;
-        color: #3d4d5e; max-width: 480px; margin: 0 auto;
+    .text-bubble p {
+        font-size: 0.85rem;
+        font-weight: 300;
+        line-height: 1.85;
+        color: #2e4460;
     }
 
-    .wip {
-        padding: 8rem 2rem; text-align: center; background: #edf1f5;
+    .scroll-track {
+        position: relative;
+        z-index: 0;
     }
 
-    .wip p {
-        font-size: 0.9rem; font-weight: 300; color: #3d4d5e;
-        max-width: 400px; margin: 0 auto 1rem;
+    .lead-scroll-section {
+        height: 150vh;
+    }
+
+    @media (max-width: 900px) {
+        .text-bubble {
+            right: 1.5rem;
+            left: 1.5rem;
+            bottom: 2rem;
+            max-width: none;
+        }
     }
 </style>
+
+<script>
+    const textData = [
+        {
+            num: 'lead',
+            headline: 'Bring people on the journey',
+            body: "I went from being the only designer to leading a team of 8 inside a product org. Most of what I've learned about leadership, I figured out by doing it — and I'm still figuring it out."
+        },
+        {
+            num: '01 — contribution',
+            headline: 'Contribution over presence',
+            body: "I want people who riff, build, disagree — and come out with something better than any of us would've made alone. What frustrates me is when people don't bring their own thinking. If I'm steering every decision, that's not a team — it's a funnel."
+        },
+        {
+            num: '02 — the gap',
+            headline: 'The gap between knowing and doing',
+            body: "Everyone nods when you name the pattern. But then what? Knowing something and actually doing it are different things. That gap is where I focus — turning frameworks into real behaviour change, not just shared language."
+        },
+        {
+            num: '03 — decisions',
+            headline: 'Decisions like a tree',
+            body: "I think about decisions like a tree. Some are leaves — make them yourself. Some are branches — bring them to me. Some are the trunk — that's my call. It's how autonomy works without chaos."
+        },
+        {
+            num: '04 — inception',
+            headline: 'Inception over buy-in',
+            body: "Buy-in is asking permission after the fact. Inception is building it together from the start. If people helped make the decision, you don't need to sell them on it."
+        }
+    ];
+
+    const bubble = document.getElementById('textBubble') as HTMLElement;
+    const bubbleNum = document.getElementById('bubbleNum') as HTMLElement;
+    const bubbleH2 = document.getElementById('bubbleHeadline') as HTMLElement;
+    const bubbleBody = document.getElementById('bubbleBody') as HTMLElement;
+    const diagramFixed = document.getElementById('diagramFixed') as HTMLElement;
+    const scrollTrack = document.querySelector('.scroll-track') as HTMLElement;
+
+    let currentSection = 0;
+    let ticking = false;
+
+    function getActiveSection(): number {
+        const section = document.querySelector('.lead-scroll-section') as HTMLElement;
+        const sectionHeight = section.offsetHeight;
+        return Math.min(Math.round(window.scrollY / sectionHeight), textData.length - 1);
+    }
+
+    function onScroll() {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+                const active = getActiveSection();
+                if (active !== currentSection) {
+                    currentSection = active;
+                    const data = textData[active];
+                    bubble.style.opacity = '0';
+                    setTimeout(() => {
+                        bubbleNum.textContent = data.num;
+                        bubbleH2.textContent = data.headline;
+                        bubbleBody.textContent = data.body;
+                        bubble.style.opacity = '1';
+                    }, 150);
+                }
+
+                const trackBottom = scrollTrack.getBoundingClientRect().bottom;
+                const pastTrack = trackBottom < window.innerHeight * 0.5;
+                diagramFixed.style.opacity = pastTrack ? '0' : '1';
+                bubble.style.display = pastTrack ? 'none' : '';
+
+                ticking = false;
+            });
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+</script>
