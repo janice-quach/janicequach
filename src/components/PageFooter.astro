@@ -15,11 +15,11 @@ const bgColors = {
     <p class="prompt">Let's talk about how things should work.</p>
     <div class="links">
         <a href="mailto:hello@janicequach.com">email</a>
-        <a href="https://linkedin.com/in/janicequach" target="_blank">linkedin</a>
+        <a href="https://linkedin.com/in/janicequach" target="_blank" rel="noopener noreferrer">linkedin</a>
     </div>
     <p class="personal">Painter, dancer, chihuahua owner, coffee dependent.</p>
     <p class="colophon">Designed by me, built with Claude.</p>
-    <a class="home-link" href="/">← back to home</a>
+    <a class="home-link" href="/" aria-label="Back to home">← back to home</a>
 </footer>
 
 <style>
@@ -59,16 +59,16 @@ const bgColors = {
     .personal {
         font-size: 0.7rem;
         font-weight: 300;
-        opacity: 0.3;
+        opacity: 0.5;
         margin-bottom: 0.5rem;
     }
 
     .colophon {
         font-size: 0.65rem;
         font-weight: 300;
-        opacity: 0.25;
+        opacity: 0.45;
         margin-bottom: 2rem;
     }
 
-    .home-link { opacity: 0.3; }
+    .home-link { opacity: 0.5; }
 </style>
