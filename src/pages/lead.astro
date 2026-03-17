@@ -5,12 +5,12 @@ import Base from "../layouts/Base.astro";
 ---
 <Base title="lead — janice quach" description="Bring people on the journey. How Janice Quach builds teams that think for themselves.">
     <div class="bg-layer" id="bgLayer"></div>
-    <a class="back-btn" href="/">← back</a>
+    <a class="back-btn" href="/" aria-label="Back to home">← back</a>
 
     <!-- Fixed diagram in viewport centre -->
     <div class="diagram-fixed" id="diagramFixed">
-        <div class="orb orb-a"></div>
-        <div class="orb orb-b"></div>
+        <div class="orb orb-a" aria-hidden="true"></div>
+        <div class="orb orb-b" aria-hidden="true"></div>
         <LeadMorphDiagram />
     </div>
 

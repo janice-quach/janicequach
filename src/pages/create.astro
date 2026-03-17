@@ -5,11 +5,11 @@ import Base from "../layouts/Base.astro";
 ---
 <Base title="create — janice quach" description="Design is how it works. Visual craft, UI, diagrams, and systems by Janice Quach.">
     <div class="bg-layer" id="createBgLayer"></div>
-    <a class="back-btn" href="/">← back</a>
+    <a class="back-btn" href="/" aria-label="Back to home">← back</a>
 
     <div class="diagram-fixed" id="createDiagramFixed">
-        <div class="orb orb-a"></div>
-        <div class="orb orb-b"></div>
+        <div class="orb orb-a" aria-hidden="true"></div>
+        <div class="orb orb-b" aria-hidden="true"></div>
         <CreateMorphDiagram />
     </div>
 
