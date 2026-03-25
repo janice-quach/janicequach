@@ -8,7 +8,7 @@
         <div class="work-panel" id="work-1">
             <!-- Drop screenshot: public/work/systems.jpg (or .png, .webp) -->
             <div class="image-slot">
-                <img class="work-img" src="/work/systems.jpg" alt="design systems work sample" onerror="this.style.display='none'">
+                <img class="work-img" src="/work/systems.jpg" alt="design systems work sample">
                 <div class="slot-empty">
                     <span class="placeholder-label">design systems</span>
                     <span class="slot-hint">drop screenshot → public/work/systems.jpg</span>
@@ -19,7 +19,7 @@
         <div class="work-panel" id="work-2">
             <!-- Drop screenshot: public/work/product.jpg (or .png, .webp) -->
             <div class="image-slot">
-                <img class="work-img" src="/work/product.jpg" alt="product interface work sample" onerror="this.style.display='none'">
+                <img class="work-img" src="/work/product.jpg" alt="product interface work sample">
                 <div class="slot-empty">
                     <span class="placeholder-label">product interfaces</span>
                     <span class="slot-hint">drop screenshot → public/work/product.jpg</span>
@@ -30,7 +30,7 @@
         <div class="work-panel" id="work-3">
             <!-- Drop screenshot: public/work/visual.jpg (or .png, .webp) -->
             <div class="image-slot">
-                <img class="work-img" src="/work/visual.jpg" alt="visual thinking work sample" onerror="this.style.display='none'">
+                <img class="work-img" src="/work/visual.jpg" alt="visual thinking work sample">
                 <div class="slot-empty">
                     <span class="placeholder-label">visual thinking</span>
                     <span class="slot-hint">drop screenshot → public/work/visual.jpg</span>
@@ -195,7 +195,6 @@
 
     @media (max-width: 900px) {
         .morph-svg { width: min(85vw, 50vh); height: min(85vw, 50vh); }
-        .placeholder-art { width: min(75vw, 45vh); height: min(75vw, 45vh); }
     }
 </style>
 
@@ -505,6 +504,10 @@
             (sec as HTMLElement).style.opacity = String(d<0.5?1:Math.max(0.15,1-(d-0.5)*1.5));
         });
     }
+
+    document.querySelectorAll<HTMLImageElement>('.work-img').forEach(img => {
+        img.addEventListener('error', () => { img.style.display = 'none'; });
+    });
 
     window.addEventListener('scroll', onScroll, { passive: true });
     update();
