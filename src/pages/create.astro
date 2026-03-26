@@ -235,6 +235,25 @@ import Base from "../layouts/Base.astro";
         color: #5a5550;
     }
 
+    .work-card {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .work-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .work-card {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    }
+
     @media (max-width: 900px) {
         .text-bubble {
             right: 1.5rem;
@@ -333,4 +352,18 @@ import Base from "../layouts/Base.astro";
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    const cards = document.querySelectorAll<HTMLElement>('.work-card');
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.15 }
+    );
+    cards.forEach((card) => observer.observe(card));
 </script>
