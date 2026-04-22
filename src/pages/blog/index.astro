@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content'
+import Base from '../../layouts/Base.astro'
+
+const posts = (await getCollection('blog'))
+  .map((post) => {
+    const title =
+      post.data.title ||
+      post.body
+        ?.split('\n')
+        .find((l: string) => l.startsWith('# '))
+        ?.replace(/^#\s*/, '') ||
+      'Untitled'
+    return {
+      slug: post.id.replace(/^\d+_/, ''),
+      title,
+      date: post.data.date,
+      description: post.data.description || '',
+    }
+  })
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+---
+
+<Base title="writing — janice quach" description="thoughts on design, leadership, and how things should work.">
+  <main class="blog-list-page">
+    <header class="blog-header">
+      <a href="/" class="back-link">janice quach</a>
+      <h1>writing</h1>
+    </header>
+
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.slug}`} class="post-row">
+            <span class="post-title">{post.title}</span>
+            <time class="post-date">
+              {new Date(post.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+            </time>
+          </a>
+          {post.description && <p class="post-desc">{post.description}</p>}
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>
+
+<style>
+  .blog-list-page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+  }
+
+  .blog-header {
+    margin-bottom: 4rem;
+  }
+
+  .back-link {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    color: rgba(42, 37, 32, 0.45);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: rgba(42, 37, 32, 0.8);
+  }
+
+  h1 {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #2a2520;
+    margin-top: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .post-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .post-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5rem;
+    text-decoration: none;
+    color: #2a2520;
+    transition: color 0.2s ease;
+  }
+
+  .post-row:hover .post-title {
+    color: rgba(42, 37, 32, 0.55);
+  }
+
+  .post-title {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+
+  .post-date {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: rgba(42, 37, 32, 0.4);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .post-desc {
+    font-size: 0.88rem;
+    color: rgba(42, 37, 32, 0.5);
+    margin-top: 0.35rem;
+    line-height: 1.6;
+  }
+</style>

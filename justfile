@@ -23,8 +23,4 @@ ci: lint build
 
 # Deploy to Cloudflare Pages
 deploy: ci
-    pnpm wrangler pages deploy dist/ --project-name janicequach-com
-
-# Quick deploy (skip lint)
-deploy-quick: build
-    pnpm wrangler pages deploy dist/ --project-name janicequach-com
+    CLOUDFLARE_ACCOUNT_ID=80cc805d16aa1dd81cc6f459124b0c51 pnpm wrangler pages deploy
