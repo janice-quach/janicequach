@@ -1,3 +1,7 @@
 name = "janicequach"
 compatibility_date = "2026-03-13"
 pages_build_output_dir = "./dist"
+
+[[analytics_engine_datasets]]
+binding = "READS"
+dataset = "blog_reads"

@@ -40,6 +40,42 @@ const date = new Date(post.data.date).toLocaleDateString('en-US', {
       <Content />
     </article>
 
+    <script>
+      ;(() => {
+        let maxScroll = 0
+        const start = Date.now()
+        const slug = window.location.pathname.replace(/^\/blog\//, '').replace(/\/$/, '')
+
+        const track = () => {
+          const doc = document.documentElement
+          const scrollTop = window.scrollY
+          const scrollHeight = doc.scrollHeight - doc.clientHeight
+          if (scrollHeight > 0) {
+            maxScroll = Math.max(maxScroll, Math.round((scrollTop / scrollHeight) * 100))
+          }
+        }
+
+        const send = () => {
+          const time = Math.round((Date.now() - start) / 1000)
+          if (time < 2) return
+          navigator.sendBeacon(
+            '/api/beacon',
+            JSON.stringify({
+              slug,
+              scroll: maxScroll,
+              time,
+              referrer: document.referrer || '',
+            })
+          )
+        }
+
+        window.addEventListener('scroll', track, { passive: true })
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'hidden') send()
+        })
+      })()
+    </script>
+
     <footer class="post-footer">
       <a href="/blog" class="back-link">← all writing</a>
     </footer>
