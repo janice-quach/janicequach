@@ -23,7 +23,3 @@ what staying gave me: depth. i know this product, this industry, these people. i
 what staying costs: sometimes you have to actively resist the gravity of how things have always been done. the longer you're somewhere the more you accumulate — processes, opinions, unspoken assumptions about what's possible. the risk isn't stagnation exactly. it's calcification. knowing too much can make you stop asking why.
 
 i try to stay curious about the place i know best. it's harder than it sounds.
-
----
-
-*[janice: fill in anything about the actual Univative moment — what the brief was, what the presentation felt like, anything specific about the offer. i've kept it general so you can make it real.]*

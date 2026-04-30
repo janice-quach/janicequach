@@ -1,20 +1,183 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-  <rect width="1200" height="800" fill="#e2ddd5"/>
-  <rect x="0" y="0" width="1200" height="56" fill="rgba(58,53,48,0.04)"/>
-  <circle cx="28" cy="28" r="4" fill="rgba(58,53,48,0.1)"/>
-  <rect x="60" y="20" width="120" height="16" rx="4" fill="rgba(58,53,48,0.06)"/>
-  <rect x="0" y="56" width="240" height="744" fill="rgba(58,53,48,0.02)"/>
-  <rect x="24" y="80" width="192" height="32" rx="6" fill="rgba(58,53,48,0.05)"/>
-  <rect x="24" y="124" width="192" height="32" rx="6" fill="rgba(58,53,48,0.03)"/>
-  <rect x="24" y="168" width="192" height="32" rx="6" fill="rgba(58,53,48,0.03)"/>
-  <rect x="24" y="212" width="192" height="32" rx="6" fill="rgba(58,53,48,0.03)"/>
-  <rect x="280" y="88" width="480" height="280" rx="12" fill="rgba(58,53,48,0.03)" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
-  <rect x="312" y="120" width="180" height="24" rx="4" fill="rgba(58,53,48,0.06)"/>
-  <rect x="312" y="160" width="416" height="12" rx="4" fill="rgba(58,53,48,0.04)"/>
-  <rect x="312" y="184" width="360" height="12" rx="4" fill="rgba(58,53,48,0.04)"/>
-  <rect x="312" y="240" width="100" height="36" rx="8" fill="rgba(107,93,80,0.12)"/>
-  <rect x="424" y="240" width="100" height="36" rx="8" fill="none" stroke="rgba(58,53,48,0.1)" stroke-width="1"/>
-  <rect x="280" y="400" width="232" height="160" rx="12" fill="rgba(58,53,48,0.03)" stroke="rgba(58,53,48,0.06)" stroke-width="1"/>
-  <rect x="528" y="400" width="232" height="160" rx="12" fill="rgba(58,53,48,0.03)" stroke="rgba(58,53,48,0.06)" stroke-width="1"/>
-  <text x="600" y="720" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" letter-spacing="3" fill="rgba(58,53,48,0.2)">product interfaces</text>
+  <defs>
+    <style>
+      text { font-family: Inter, -apple-system, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#e8e4de"/>
+
+  <!-- Browser frame -->
+  <rect x="80" y="80" width="1040" height="640" rx="12" fill="white" stroke="rgba(58,53,48,0.1)" stroke-width="1"/>
+
+  <!-- Window chrome -->
+  <rect x="80" y="80" width="1040" height="44" rx="12" fill="rgba(58,53,48,0.04)"/>
+  <rect x="80" y="110" width="1040" height="14" fill="rgba(58,53,48,0.04)"/>
+  <circle cx="110" cy="102" r="5" fill="rgba(58,53,48,0.12)"/>
+  <circle cx="128" cy="102" r="5" fill="rgba(58,53,48,0.12)"/>
+  <circle cx="146" cy="102" r="5" fill="rgba(58,53,48,0.12)"/>
+
+  <!-- URL bar -->
+  <rect x="320" y="91" width="560" height="22" rx="11" fill="rgba(58,53,48,0.06)"/>
+  <text x="600" y="106" font-size="9" fill="rgba(58,53,48,0.3)" text-anchor="middle">clickview.com · My Library</text>
+
+  <!-- Top nav -->
+  <rect x="80" y="124" width="1040" height="48" fill="white"/>
+  <rect x="80" y="171" width="1040" height="1" fill="rgba(58,53,48,0.08)"/>
+
+  <!-- Nav logo + play triangle -->
+  <polygon points="100,144 100,154 108,149" fill="#f8981d"/>
+  <text x="114" y="153" font-size="13" fill="#1b2d71" font-weight="700" letter-spacing="-0.3">ClickView</text>
+
+  <!-- Nav links -->
+  <text x="220" y="153" font-size="11" fill="rgba(58,53,48,0.4)">Browse</text>
+  <text x="285" y="153" font-size="11" fill="#1b2d71" font-weight="500">My Library</text>
+  <rect x="282" y="168" width="62" height="3" rx="1.5" fill="#00a89d"/>
+  <text x="365" y="153" font-size="11" fill="rgba(58,53,48,0.4)">Interactives</text>
+  <text x="450" y="153" font-size="11" fill="rgba(58,53,48,0.4)">Reports</text>
+
+  <!-- Nav right -->
+  <rect x="920" y="137" width="72" height="28" rx="6" fill="#1b2d71"/>
+  <text x="956" y="156" font-size="10" fill="white" text-anchor="middle" font-weight="500">+ Assign</text>
+  <circle cx="1060" cy="151" r="16" fill="rgba(27,45,113,0.1)"/>
+  <text x="1060" y="156" font-size="11" fill="#1b2d71" text-anchor="middle" font-weight="600">JQ</text>
+
+  <!-- Sidebar -->
+  <rect x="259" y="172" width="1" height="548" fill="rgba(58,53,48,0.07)"/>
+
+  <text x="104" y="208" font-size="8" letter-spacing="1.5" fill="rgba(58,53,48,0.35)" font-weight="600">MY LIBRARY</text>
+  <rect x="92" y="218" width="156" height="32" rx="5" fill="rgba(0,168,157,0.08)" stroke="rgba(0,168,157,0.2)" stroke-width="1"/>
+  <text x="108" y="238" font-size="10" fill="#00a89d" font-weight="500">▶  All Videos</text>
+  <text x="108" y="270" font-size="10" fill="rgba(58,53,48,0.5)">☰  Playlists</text>
+  <text x="108" y="300" font-size="10" fill="rgba(58,53,48,0.5)">✎  Interactives</text>
+  <text x="108" y="330" font-size="10" fill="rgba(58,53,48,0.5)">⊞  Shared with me</text>
+  <text x="108" y="360" font-size="10" fill="rgba(58,53,48,0.5)">↗  Recently added</text>
+
+  <rect x="92" y="380" width="156" height="1" fill="rgba(58,53,48,0.08)"/>
+  <text x="104" y="408" font-size="8" letter-spacing="1.5" fill="rgba(58,53,48,0.35)" font-weight="600">SUBJECTS</text>
+  <text x="108" y="432" font-size="10" fill="rgba(58,53,48,0.4)">Science</text>
+  <text x="108" y="456" font-size="10" fill="rgba(58,53,48,0.4)">Mathematics</text>
+  <text x="108" y="480" font-size="10" fill="rgba(58,53,48,0.4)">English</text>
+  <text x="108" y="504" font-size="10" fill="rgba(58,53,48,0.4)">HASS</text>
+  <text x="108" y="528" font-size="10" fill="rgba(58,53,48,0.3)">+ 8 more</text>
+
+  <!-- Search + filter row -->
+  <rect x="280" y="188" width="340" height="34" rx="6" fill="rgba(58,53,48,0.05)" stroke="rgba(58,53,48,0.12)" stroke-width="1"/>
+  <text x="302" y="210" font-size="10" fill="rgba(58,53,48,0.3)">Search your library...</text>
+  <text x="600" y="210" font-size="10" fill="rgba(58,53,48,0.25)" text-anchor="end">⌘K</text>
+
+  <rect x="636" y="193" width="56" height="24" rx="12" fill="rgba(0,168,157,0.1)" stroke="rgba(0,168,157,0.3)" stroke-width="1"/>
+  <text x="664" y="209" font-size="9" fill="#00a89d" text-anchor="middle" font-weight="500">Year 8</text>
+  <rect x="700" y="193" width="62" height="24" rx="12" fill="rgba(58,53,48,0.05)" stroke="rgba(58,53,48,0.12)" stroke-width="1"/>
+  <text x="731" y="209" font-size="9" fill="rgba(58,53,48,0.5)" text-anchor="middle">Science</text>
+  <rect x="770" y="193" width="56" height="24" rx="12" fill="rgba(58,53,48,0.05)" stroke="rgba(58,53,48,0.12)" stroke-width="1"/>
+  <text x="798" y="209" font-size="9" fill="rgba(58,53,48,0.5)" text-anchor="middle">Video</text>
+  <text x="840" y="209" font-size="9" fill="rgba(58,53,48,0.3)">+ Filter</text>
+
+  <text x="280" y="248" font-size="9" fill="rgba(58,53,48,0.35)">47 videos</text>
+  <text x="1080" y="248" font-size="9" fill="rgba(58,53,48,0.4)" text-anchor="end">Sort: Relevance ↓</text>
+
+  <!-- Video cards row 1 -->
+  <!-- Card 1 -->
+  <rect x="280" y="260" width="230" height="186" rx="8" fill="white" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+  <rect x="280" y="260" width="230" height="118" rx="8" fill="rgba(27,45,113,0.85)"/>
+  <rect x="280" y="354" width="230" height="24" fill="rgba(27,45,113,0.85)"/>
+  <circle cx="395" cy="316" r="22" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="389,307 389,325 407,316" fill="white"/>
+  <rect x="292" y="270" width="38" height="16" rx="3" fill="rgba(0,0,0,0.4)"/>
+  <text x="311" y="282" font-size="8" fill="white" text-anchor="middle">12:34</text>
+  <rect x="456" y="270" width="46" height="16" rx="3" fill="rgba(248,152,29,0.9)"/>
+  <text x="479" y="282" font-size="7.5" fill="white" text-anchor="middle" font-weight="600">ORIGINAL</text>
+  <text x="292" y="400" font-size="10.5" fill="#2a2520" font-weight="500">Photosynthesis</text>
+  <text x="292" y="417" font-size="8.5" fill="rgba(58,53,48,0.45)">Year 7–9 · Science · 12 min</text>
+  <rect x="292" y="428" width="44" height="16" rx="8" fill="rgba(0,168,157,0.1)" stroke="rgba(0,168,157,0.2)" stroke-width="1"/>
+  <text x="314" y="440" font-size="8" fill="#00a89d" text-anchor="middle">Quiz</text>
+  <rect x="344" y="428" width="60" height="16" rx="8" fill="rgba(27,45,113,0.08)" stroke="rgba(27,45,113,0.15)" stroke-width="1"/>
+  <text x="374" y="440" font-size="8" fill="#1b2d71" text-anchor="middle">Resource</text>
+  <rect x="456" y="425" width="46" height="22" rx="5" fill="#1b2d71"/>
+  <text x="479" y="440" font-size="9" fill="white" text-anchor="middle" font-weight="500">Assign</text>
+
+  <!-- Card 2 -->
+  <rect x="526" y="260" width="230" height="186" rx="8" fill="white" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+  <rect x="526" y="260" width="230" height="118" rx="8" fill="rgba(26,122,58,0.8)"/>
+  <rect x="526" y="354" width="230" height="24" fill="rgba(26,122,58,0.8)"/>
+  <circle cx="641" cy="316" r="22" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="635,307 635,325 653,316" fill="white"/>
+  <rect x="538" y="270" width="38" height="16" rx="3" fill="rgba(0,0,0,0.4)"/>
+  <text x="557" y="282" font-size="8" fill="white" text-anchor="middle">8:20</text>
+  <text x="538" y="400" font-size="10.5" fill="#2a2520" font-weight="500">Cell Biology</text>
+  <text x="538" y="417" font-size="8.5" fill="rgba(58,53,48,0.45)">Year 8 · Science · 8 min</text>
+  <rect x="538" y="428" width="44" height="16" rx="8" fill="rgba(0,168,157,0.1)" stroke="rgba(0,168,157,0.2)" stroke-width="1"/>
+  <text x="560" y="440" font-size="8" fill="#00a89d" text-anchor="middle">Quiz</text>
+  <rect x="702" y="425" width="46" height="22" rx="5" fill="#1b2d71"/>
+  <text x="725" y="440" font-size="9" fill="white" text-anchor="middle" font-weight="500">Assign</text>
+
+  <!-- Card 3 -->
+  <rect x="772" y="260" width="230" height="186" rx="8" fill="white" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+  <rect x="772" y="260" width="230" height="118" rx="8" fill="rgba(100,60,140,0.75)"/>
+  <rect x="772" y="354" width="230" height="24" fill="rgba(100,60,140,0.75)"/>
+  <circle cx="887" cy="316" r="22" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="881,307 881,325 899,316" fill="white"/>
+  <rect x="784" y="270" width="38" height="16" rx="3" fill="rgba(0,0,0,0.4)"/>
+  <text x="803" y="282" font-size="8" fill="white" text-anchor="middle">10:15</text>
+  <text x="784" y="400" font-size="10.5" fill="#2a2520" font-weight="500">Ecosystems</text>
+  <text x="784" y="417" font-size="8.5" fill="rgba(58,53,48,0.45)">Year 7–9 · Science · 10 min</text>
+  <rect x="784" y="428" width="60" height="16" rx="8" fill="rgba(27,45,113,0.08)" stroke="rgba(27,45,113,0.15)" stroke-width="1"/>
+  <text x="814" y="440" font-size="8" fill="#1b2d71" text-anchor="middle">Resource</text>
+  <rect x="948" y="425" width="46" height="22" rx="5" fill="#1b2d71"/>
+  <text x="971" y="440" font-size="9" fill="white" text-anchor="middle" font-weight="500">Assign</text>
+
+  <!-- Card 4 partial -->
+  <rect x="1018" y="260" width="90" height="186" rx="8" fill="white" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+  <rect x="1018" y="260" width="90" height="118" rx="8" fill="rgba(180,90,40,0.7)"/>
+  <rect x="1018" y="354" width="90" height="24" fill="rgba(180,90,40,0.7)"/>
+  <circle cx="1063" cy="316" r="22" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="1057,307 1057,325 1075,316" fill="white"/>
+
+  <!-- Video cards row 2 -->
+  <!-- Card 5 -->
+  <rect x="280" y="464" width="230" height="186" rx="8" fill="white" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+  <rect x="280" y="464" width="230" height="118" rx="8" fill="rgba(40,80,160,0.7)"/>
+  <rect x="280" y="558" width="230" height="24" fill="rgba(40,80,160,0.7)"/>
+  <circle cx="395" cy="520" r="22" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="389,511 389,529 407,520" fill="white"/>
+  <rect x="292" y="474" width="38" height="16" rx="3" fill="rgba(0,0,0,0.4)"/>
+  <text x="311" y="486" font-size="8" fill="white" text-anchor="middle">15:00</text>
+  <text x="292" y="604" font-size="10.5" fill="#2a2520" font-weight="500">DNA &amp; Heredity</text>
+  <text x="292" y="621" font-size="8.5" fill="rgba(58,53,48,0.45)">Year 9–10 · Science · 15 min</text>
+  <rect x="456" y="630" width="46" height="22" rx="5" fill="#1b2d71"/>
+  <text x="479" y="645" font-size="9" fill="white" text-anchor="middle" font-weight="500">Assign</text>
+
+  <!-- Card 6 -->
+  <rect x="526" y="464" width="230" height="186" rx="8" fill="white" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+  <rect x="526" y="464" width="230" height="118" rx="8" fill="rgba(180,130,30,0.75)"/>
+  <rect x="526" y="558" width="230" height="24" fill="rgba(180,130,30,0.75)"/>
+  <circle cx="641" cy="520" r="22" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="635,511 635,529 653,520" fill="white"/>
+  <rect x="538" y="474" width="38" height="16" rx="3" fill="rgba(0,0,0,0.4)"/>
+  <text x="557" y="486" font-size="8" fill="white" text-anchor="middle">11:45</text>
+  <text x="538" y="604" font-size="10.5" fill="#2a2520" font-weight="500">Food Webs</text>
+  <text x="538" y="621" font-size="8.5" fill="rgba(58,53,48,0.45)">Year 7–8 · Science · 11 min</text>
+  <rect x="702" y="630" width="46" height="22" rx="5" fill="#1b2d71"/>
+  <text x="725" y="645" font-size="9" fill="white" text-anchor="middle" font-weight="500">Assign</text>
+
+  <!-- Cards 7 + 8 partial -->
+  <rect x="772" y="464" width="230" height="186" rx="8" fill="white" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+  <rect x="772" y="464" width="230" height="118" rx="8" fill="rgba(60,140,120,0.7)"/>
+  <rect x="772" y="558" width="230" height="24" fill="rgba(60,140,120,0.7)"/>
+  <circle cx="887" cy="520" r="22" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="881,511 881,529 899,520" fill="white"/>
+
+  <rect x="1018" y="464" width="90" height="186" rx="8" fill="white" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+  <rect x="1018" y="464" width="90" height="118" rx="8" fill="rgba(140,50,80,0.7)"/>
+  <rect x="1018" y="558" width="90" height="24" fill="rgba(140,50,80,0.7)"/>
+  <circle cx="1063" cy="520" r="22" fill="rgba(255,255,255,0.15)"/>
+  <polygon points="1057,511 1057,529 1075,520" fill="white"/>
+
+  <!-- Bottom label -->
+  <rect x="80" y="668" width="1040" height="52" rx="0" fill="white"/>
+  <rect x="80" y="668" width="1040" height="1" fill="rgba(58,53,48,0.08)"/>
+  <rect x="80" y="706" width="1040" height="14" rx="0" fill="white"/>
+  <text x="600" y="698" font-size="9" fill="rgba(58,53,48,0.25)" text-anchor="middle" letter-spacing="0.5">complexity made invisible · the best interfaces feel obvious</text>
 </svg>

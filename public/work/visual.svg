@@ -1,23 +1,102 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-  <rect width="1200" height="800" fill="#dfd9d1"/>
-  <line x1="600" y1="80" x2="600" y2="700" stroke="rgba(58,53,48,0.06)" stroke-width="1"/>
-  <line x1="100" y1="400" x2="1100" y2="400" stroke="rgba(58,53,48,0.06)" stroke-width="1"/>
-  <circle cx="600" cy="400" r="180" fill="none" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
-  <circle cx="600" cy="400" r="120" fill="none" stroke="rgba(58,53,48,0.06)" stroke-width="1"/>
-  <circle cx="600" cy="400" r="60" fill="none" stroke="rgba(58,53,48,0.04)" stroke-width="1"/>
-  <circle cx="480" cy="300" r="8" fill="rgba(107,93,80,0.2)"/>
-  <circle cx="720" cy="320" r="8" fill="rgba(107,93,80,0.2)"/>
-  <circle cx="560" cy="500" r="8" fill="rgba(107,93,80,0.2)"/>
-  <circle cx="680" cy="480" r="8" fill="rgba(107,93,80,0.2)"/>
-  <circle cx="600" cy="280" r="8" fill="rgba(107,93,80,0.2)"/>
-  <line x1="480" y1="300" x2="600" y2="280" stroke="rgba(58,53,48,0.1)" stroke-width="1"/>
-  <line x1="600" y1="280" x2="720" y2="320" stroke="rgba(58,53,48,0.1)" stroke-width="1"/>
-  <line x1="720" y1="320" x2="680" y2="480" stroke="rgba(58,53,48,0.1)" stroke-width="1"/>
-  <line x1="680" y1="480" x2="560" y2="500" stroke="rgba(58,53,48,0.1)" stroke-width="1"/>
-  <line x1="560" y1="500" x2="480" y2="300" stroke="rgba(58,53,48,0.1)" stroke-width="1"/>
-  <text x="460" y="288" font-family="Inter, sans-serif" font-size="9" letter-spacing="2" fill="rgba(58,53,48,0.25)">map</text>
-  <text x="728" y="316" font-family="Inter, sans-serif" font-size="9" letter-spacing="2" fill="rgba(58,53,48,0.25)">frame</text>
-  <text x="552" y="520" font-family="Inter, sans-serif" font-size="9" letter-spacing="2" fill="rgba(58,53,48,0.25)">connect</text>
-  <text x="688" y="488" font-family="Inter, sans-serif" font-size="9" letter-spacing="2" fill="rgba(58,53,48,0.25)">reveal</text>
-  <text x="600" y="720" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" letter-spacing="3" fill="rgba(58,53,48,0.2)">visual thinking</text>
+  <defs>
+    <style>
+      text { font-family: Inter, -apple-system, sans-serif; }
+    </style>
+    <!-- Clip circles for intersection fill -->
+    <clipPath id="clipA">
+      <circle cx="440" cy="360" r="200"/>
+    </clipPath>
+    <clipPath id="clipB">
+      <circle cx="600" cy="320" r="200"/>
+    </clipPath>
+    <clipPath id="clipC">
+      <circle cx="560" cy="480" r="180"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#e8e4de"/>
+
+  <!-- ── LEFT PANEL: Framework diagram ── -->
+
+  <!-- Three overlapping circles -->
+  <!-- Circle A: Research -->
+  <circle cx="440" cy="360" r="200" fill="rgba(27,45,113,0.06)" stroke="rgba(27,45,113,0.2)" stroke-width="1.5"/>
+  <!-- Circle B: Strategy -->
+  <circle cx="600" cy="320" r="200" fill="rgba(0,168,157,0.06)" stroke="rgba(0,168,157,0.2)" stroke-width="1.5"/>
+  <!-- Circle C: Design -->
+  <circle cx="560" cy="480" r="180" fill="rgba(248,152,29,0.06)" stroke="rgba(248,152,29,0.2)" stroke-width="1.5"/>
+
+  <!-- Intersection: A ∩ B -->
+  <circle cx="440" cy="360" r="200" fill="rgba(27,45,113,0.05)" clip-path="url(#clipB)"/>
+  <!-- Intersection: B ∩ C -->
+  <circle cx="600" cy="320" r="200" fill="rgba(0,168,157,0.05)" clip-path="url(#clipC)"/>
+  <!-- Intersection: A ∩ C -->
+  <circle cx="440" cy="360" r="200" fill="rgba(248,152,29,0.05)" clip-path="url(#clipC)"/>
+
+  <!-- Circle labels -->
+  <text x="330" y="290" font-size="13" fill="#1b2d71" font-weight="500" text-anchor="middle">research</text>
+  <text x="330" y="308" font-size="9" fill="rgba(27,45,113,0.5)" text-anchor="middle">what people need</text>
+
+  <text x="694" y="266" font-size="13" fill="#00a89d" font-weight="500" text-anchor="middle">strategy</text>
+  <text x="694" y="284" font-size="9" fill="rgba(0,168,157,0.6)" text-anchor="middle">what matters most</text>
+
+  <text x="440" y="614" font-size="13" fill="#c47a10" font-weight="500" text-anchor="middle">design</text>
+  <text x="440" y="632" font-size="9" fill="rgba(248,152,29,0.7)" text-anchor="middle">what it becomes</text>
+
+  <!-- Centre label -->
+  <text x="524" y="396" font-size="10" fill="rgba(58,53,48,0.6)" text-anchor="middle" font-weight="500">the</text>
+  <text x="524" y="412" font-size="10" fill="rgba(58,53,48,0.6)" text-anchor="middle" font-weight="500">work</text>
+
+  <!-- ── DIVIDER ── -->
+  <line x1="760" y1="100" x2="760" y2="700" stroke="rgba(58,53,48,0.08)" stroke-width="1"/>
+
+  <!-- ── RIGHT PANEL: Process breakdown ── -->
+
+  <!-- Phase labels -->
+  <text x="800" y="130" font-size="8.5" letter-spacing="2" fill="rgba(58,53,48,0.35)" font-weight="600">HOW THE THINKING MOVES</text>
+
+  <!-- Step 1: Observe -->
+  <rect x="800" y="156" width="12" height="12" rx="2" fill="#1b2d71"/>
+  <text x="824" y="167" font-size="11" fill="#2a2520" font-weight="500">Observe</text>
+  <text x="824" y="182" font-size="9" fill="rgba(58,53,48,0.45)" font-weight="300">Sit in the problem. Watch what people actually do, not what they say they do. The gap between intent and behaviour is where the work lives.</text>
+  <line x1="806" y1="168" x2="806" y2="224" stroke="rgba(58,53,48,0.12)" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <!-- Step 2: Map -->
+  <rect x="800" y="224" width="12" height="12" rx="2" fill="rgba(0,168,157,0.7)"/>
+  <text x="824" y="235" font-size="11" fill="#2a2520" font-weight="500">Map</text>
+  <text x="824" y="250" font-size="9" fill="rgba(58,53,48,0.45)" font-weight="300">Draw the system before designing inside it. Journeys, relationships, constraints. A diagram forces clarity no brief can fake.</text>
+  <line x1="806" y1="236" x2="806" y2="292" stroke="rgba(58,53,48,0.12)" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <!-- Step 3: Frame -->
+  <rect x="800" y="292" width="12" height="12" rx="2" fill="rgba(248,152,29,0.7)"/>
+  <text x="824" y="303" font-size="11" fill="#2a2520" font-weight="500">Frame</text>
+  <text x="824" y="318" font-size="9" fill="rgba(58,53,48,0.45)" font-weight="300">Name the problem precisely. A well-framed problem is already half-solved. The frame is the argument — it predetermines what counts as a solution.</text>
+  <line x1="806" y1="304" x2="806" y2="360" stroke="rgba(58,53,48,0.12)" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <!-- Step 4: Make -->
+  <rect x="800" y="360" width="12" height="12" rx="2" fill="rgba(58,53,48,0.4)"/>
+  <text x="824" y="371" font-size="11" fill="#2a2520" font-weight="500">Make</text>
+  <text x="824" y="386" font-size="9" fill="rgba(58,53,48,0.45)" font-weight="300">Put a concrete thing in front of people. The reaction to something real is more useful than the most careful interview. Make something to find out what's true.</text>
+  <line x1="806" y1="372" x2="806" y2="428" stroke="rgba(58,53,48,0.12)" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <!-- Step 5: Test -->
+  <rect x="800" y="428" width="12" height="12" rx="2" fill="#1b2d71"/>
+  <text x="824" y="439" font-size="11" fill="#2a2520" font-weight="500">Test</text>
+  <text x="824" y="454" font-size="9" fill="rgba(58,53,48,0.45)" font-weight="300">Watch someone use what you made. Not a focus group. One person, one task. The first confused pause tells you more than a hundred survey responses.</text>
+  <line x1="806" y1="440" x2="806" y2="496" stroke="rgba(58,53,48,0.12)" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <!-- Step 6: Refine -->
+  <rect x="800" y="496" width="12" height="12" rx="2" fill="rgba(0,168,157,0.7)"/>
+  <text x="824" y="507" font-size="11" fill="#2a2520" font-weight="500">Refine</text>
+  <text x="824" y="522" font-size="9" fill="rgba(58,53,48,0.45)" font-weight="300">Cut. Simplify. The thing you're most attached to is usually the thing to remove. Good design is what survives the edit — not what survives the brainstorm.</text>
+
+  <!-- Loop arrow hint -->
+  <path d="M806 508 C780 550 780 590 806 600" fill="none" stroke="rgba(58,53,48,0.15)" stroke-width="1" stroke-dasharray="3 2"/>
+  <text x="776" y="558" font-size="8" fill="rgba(58,53,48,0.2)" text-anchor="end">loop</text>
+  <polygon points="806,597 802,607 810,607" fill="rgba(58,53,48,0.15)" transform="rotate(90,806,600)"/>
+
+  <!-- Bottom caption -->
+  <text x="600" y="754" font-size="8.5" fill="rgba(58,53,48,0.25)" text-anchor="middle" letter-spacing="0.5">draw it to see it · diagrams aren't decoration — they're how i think</text>
 </svg>
