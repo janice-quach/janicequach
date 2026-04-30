@@ -23,11 +23,11 @@ import Base from '../layouts/Base.astro'
 
     <!-- Scroll spacers — one per section to drive scroll progress -->
     <div class="scroll-track">
-        <div class="lead-scroll-section" data-section="0"></div>
-        <div class="lead-scroll-section" data-section="1"></div>
-        <div class="lead-scroll-section" data-section="2"></div>
-        <div class="lead-scroll-section" data-section="3"></div>
-        <div class="lead-scroll-section" data-section="4"></div>
+        <div class="scroll-section" data-section="0"></div>
+        <div class="scroll-section" data-section="1"></div>
+        <div class="scroll-section" data-section="2"></div>
+        <div class="scroll-section" data-section="3"></div>
+        <div class="scroll-section" data-section="4"></div>
     </div>
 
     <PageFooter theme="lead" />
@@ -111,7 +111,7 @@ import Base from '../layouts/Base.astro'
         z-index: 0;
     }
 
-    .lead-scroll-section {
+    .scroll-section {
         height: 150vh;
     }
 
@@ -129,7 +129,7 @@ import Base from '../layouts/Base.astro'
     import { initScrollSections } from '../scripts/scroll-sections'
 
     initScrollSections({
-        sectionSelector: '.lead-scroll-section',
+        sectionSelector: '.scroll-section',
         bubbleId: 'textBubble',
         numId: 'bubbleNum',
         headlineId: 'bubbleHeadline',

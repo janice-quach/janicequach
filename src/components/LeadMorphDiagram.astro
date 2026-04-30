@@ -181,7 +181,7 @@
     }
 
     function getProgress() {
-        const sections = document.querySelectorAll('.lead-scroll-section');
+        const sections = document.querySelectorAll('.scroll-section');
         if (!sections.length) return 0;
         const sectionHeight = (sections[0] as HTMLElement).offsetHeight;
         const total = (sections.length - 1) * sectionHeight;
