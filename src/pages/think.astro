@@ -7,21 +7,18 @@ import Base from '../layouts/Base.astro'
     <div class="bg-layer" id="bgLayer"></div>
     <a class="back-btn" href="/" aria-label="Back to home">← back</a>
 
-    <!-- Fixed diagram in viewport centre -->
     <div class="diagram-fixed" id="diagramFixed">
         <div class="orb orb-a" aria-hidden="true"></div>
         <div class="orb orb-b" aria-hidden="true"></div>
         <ScrollMorphDiagram />
     </div>
 
-    <!-- Fixed text bubble bottom-right -->
     <div class="text-bubble" id="textBubble">
         <p class="section-num" id="bubbleNum">think</p>
         <h2 id="bubbleHeadline">Clarity over cleverness</h2>
         <p id="bubbleBody">My brain works like this — ideas start scattered, and the job is finding the structure underneath. Whether it's research, design, or strategy, I'm drawn to simple rules that make every decision after them easier.</p>
     </div>
 
-    <!-- Scroll spacers — one per section to drive scroll progress -->
     <div class="scroll-track">
         <div class="scroll-section" data-section="0"></div>
         <div class="scroll-section" data-section="1"></div>

@@ -7,21 +7,18 @@ import Base from '../layouts/Base.astro'
     <div class="bg-layer" id="bgLayer"></div>
     <a class="back-btn" href="/" aria-label="Back to home">← back</a>
 
-    <!-- Fixed diagram in viewport centre -->
     <div class="diagram-fixed" id="diagramFixed">
         <div class="orb orb-a" aria-hidden="true"></div>
         <div class="orb orb-b" aria-hidden="true"></div>
         <LeadMorphDiagram />
     </div>
 
-    <!-- Fixed text bubble bottom-right -->
     <div class="text-bubble" id="textBubble">
         <p class="section-num" id="bubbleNum">lead</p>
         <h2 id="bubbleHeadline">Bring people on the journey</h2>
         <p id="bubbleBody">I went from being the only designer to leading a team of 8 inside a product org. Most of what I've learned about leadership, I figured out by doing it — and I'm still figuring it out.</p>
     </div>
 
-    <!-- Scroll spacers — one per section to drive scroll progress -->
     <div class="scroll-track">
         <div class="scroll-section" data-section="0"></div>
         <div class="scroll-section" data-section="1"></div>
