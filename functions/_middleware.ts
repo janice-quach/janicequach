@@ -49,6 +49,8 @@ const LOGIN_HTML = `<!DOCTYPE html>
     }
     button:hover { opacity: 0.8; }
     .error { font-size: 0.8rem; color: rgba(42,37,32,0.5); text-align: center; }
+    .back { display: block; text-align: center; font-size: 0.75rem; color: rgba(42,37,32,0.4); text-decoration: none; margin-top: 0.5rem; }
+    .back:hover { color: rgba(42,37,32,0.7); }
   </style>
 </head>
 <body>
@@ -56,6 +58,7 @@ const LOGIN_HTML = `<!DOCTYPE html>
     <input type="password" name="password" placeholder="password" autofocus autocomplete="current-password">
     <button type="submit">enter</button>
     {{ERROR}}
+    <a class="back" href="/">← janicequach.com</a>
   </form>
 </body>
 </html>`
