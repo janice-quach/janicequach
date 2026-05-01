@@ -29,7 +29,7 @@ const date = new Date(post.data.date).toLocaleDateString('en-US', {
 ---
 
 <Base title={`${title} — janice quach`} description={description}>
-  <main class="blog-post">
+  <div class="blog-post">
     <header class="post-header">
       <a href="/blog" class="back-link">← writing</a>
       <time class="post-date">{date}</time>
@@ -79,7 +79,7 @@ const date = new Date(post.data.date).toLocaleDateString('en-US', {
     <footer class="post-footer">
       <a href="/blog" class="back-link">← all writing</a>
     </footer>
-  </main>
+  </div>
 </Base>
 
 <style>
