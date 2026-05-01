@@ -63,8 +63,9 @@ const LOGIN_HTML = `<!DOCTYPE html>
 export const onRequest: PagesFunction = async ({ request, next }) => {
   const url = new URL(request.url)
 
-  // Public: everything except individual blog posts
-  if (!url.pathname.startsWith('/blog/')) return next()
+  // Public: everything except individual blog posts (index at /blog/ is public)
+  const isBlogPost = url.pathname.startsWith('/blog/') && url.pathname !== '/blog/'
+  if (!isBlogPost) return next()
 
   // /blog/[slug] requires auth
   const cookie = request.headers.get('cookie') || ''
