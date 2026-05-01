@@ -21,12 +21,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return new Response('bad', { status: 400, headers })
     }
 
-    if (context.env.READS) {
-      context.env.READS.writeDataPoint({
+    try {
+      context.env.READS?.writeDataPoint({
         blobs: [slug, referrer || ''],
         doubles: [scroll, time],
         indexes: [slug],
       })
+    } catch {
+      // READS binding absent or non-functional — silently skip analytics
     }
 
     return new Response('ok', { status: 200, headers })
