@@ -1,6 +1,6 @@
 ---
 interface Props {
-  theme: 'think' | 'lead' | 'create'
+  theme: 'think' | 'lead' | 'create' | 'contact'
 }
 
 const { theme } = Astro.props
@@ -9,6 +9,7 @@ const bgColors = {
   think: '#c8d5c0',
   lead: '#d5dde6',
   create: '#e8e4de',
+  contact: '#f4f1eb',
 }
 ---
 <footer class="im-footer" style={`background: ${bgColors[theme]}`}>
