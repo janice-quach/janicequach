@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro'
+---
+<Base
+  title="research synthesis — janice quach"
+  description="turn your raw research into structured decisions. themes, insights, tensions, priority actions — delivered within 48 hours. $300 per engagement."
+>
+  <a href="/" class="back-btn">← home</a>
+
+  <section class="synthesis">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <div class="content">
+      <p class="eyebrow">research synthesis</p>
+      <h1>raw transcripts.<br><em>structured decisions.</em></h1>
+      <p class="lede">you did the research. i'll turn it into something your team can act on.</p>
+      <p class="price">$300 · delivered within 48 hours</p>
+
+      <div class="rule" aria-hidden="true"></div>
+
+      <p class="body">paste your transcripts, notes, or survey exports — raw is fine. you'll get back a structured report: key themes with direct evidence, insights mapped to concrete design implications, the tensions your data raises (not smoothed over), and priority actions ranked by impact.</p>
+      <p class="body">no revision cycles. scope is defined by what you submit. the more signal, the stronger the synthesis.</p>
+
+      <a href="https://synthesis.janicequach.workers.dev" class="cta">submit your research →</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .synthesis {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 6rem 2rem;
+  }
+
+  .orb-1 {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle at 40% 40%, rgba(213, 196, 220, 0.35), transparent 70%);
+    top: -100px;
+    right: -80px;
+  }
+
+  .orb-2 {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle at 60% 60%, rgba(200, 213, 192, 0.3), transparent 70%);
+    bottom: -60px;
+    left: -60px;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(42, 37, 32, 0.5);
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #2a2520;
+    margin-bottom: 1.25rem;
+  }
+
+  h1 em {
+    font-style: italic;
+  }
+
+  .lede {
+    font-size: 1.0625rem;
+    color: rgba(42, 37, 32, 0.6);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+
+  .price {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #2a2520;
+    margin-bottom: 2.5rem;
+  }
+
+  .rule {
+    width: 48px;
+    height: 1px;
+    background: rgba(42, 37, 32, 0.2);
+    margin-bottom: 2rem;
+  }
+
+  .body {
+    font-size: 1rem;
+    color: rgba(42, 37, 32, 0.65);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .cta {
+    display: inline-block;
+    margin-top: 2rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #f4f1eb;
+    background: #2a2520;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cta:hover {
+    background: #45403a;
+    transform: translateY(-2px);
+  }
+
+  .cta:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .synthesis {
+      align-items: flex-start;
+      padding: 5rem 1.5rem 4rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+</style>
