@@ -1,0 +1,155 @@
+---
+import PageFooter from '../components/PageFooter.astro'
+import Base from '../layouts/Base.astro'
+---
+<Base
+  title="design critique — janice quach"
+  description="structured feedback on your landing page, app screen, or mockup. hierarchy, typography, copy, priority fixes — delivered within 48 hours. $75 per engagement."
+>
+  <a href="/" class="back-btn">← back</a>
+
+  <section class="critique">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <div class="content">
+      <p class="eyebrow">design critique</p>
+      <h1>your design.<br><em>an honest eye.</em></h1>
+      <p class="lede">submit your design. get structured feedback from a senior design lens in 48 hours.</p>
+      <p class="price">$75 · delivered within 48 hours</p>
+
+      <div class="rule" aria-hidden="true"></div>
+
+      <p class="body">describe your design — paste a Figma link, screenshot URL, or a detailed written description. you'll get back a structured critique: first impression, what's working and why, hierarchy and layout issues, typography and spacing, color and contrast flags, copy alignment, and the top three priority fixes ranked by impact with concrete actions.</p>
+      <p class="body">works for landing pages, app screens, dashboard UI, pitch decks, Figma mockups, and portfolio pieces. not a fit for brand identity systems, motion design, or multi-week sprints. no calls, no revision cycles — the intake form is designed to get signal upfront.</p>
+
+      <a href="https://critique.janicequach.workers.dev" class="cta">submit your design →</a>
+    </div>
+  </section>
+
+  <PageFooter theme="contact" />
+</Base>
+
+<style>
+  .critique {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 6rem 2rem;
+  }
+
+  .orb-1 {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle at 40% 40%, rgba(220, 207, 185, 0.38), transparent 70%);
+    top: -100px;
+    right: -80px;
+  }
+
+  .orb-2 {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle at 60% 60%, rgba(213, 196, 185, 0.28), transparent 70%);
+    bottom: -60px;
+    left: -60px;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(42, 37, 32, 0.5);
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #2a2520;
+    margin-bottom: 1.25rem;
+  }
+
+  h1 em {
+    font-style: italic;
+  }
+
+  .lede {
+    font-size: 1.0625rem;
+    color: rgba(42, 37, 32, 0.6);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+
+  .price {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #2a2520;
+    margin-bottom: 2.5rem;
+  }
+
+  .rule {
+    width: 48px;
+    height: 1px;
+    background: rgba(42, 37, 32, 0.2);
+    margin-bottom: 2rem;
+  }
+
+  .body {
+    font-size: 1rem;
+    color: rgba(42, 37, 32, 0.65);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .cta {
+    display: inline-block;
+    margin-top: 2rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #f4f1eb;
+    background: #2a2520;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cta:hover {
+    background: #45403a;
+    transform: translateY(-2px);
+  }
+
+  .cta:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .critique {
+      align-items: flex-start;
+      padding: 5rem 1.5rem 4rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+</style>
