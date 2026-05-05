@@ -1,11 +1,12 @@
 ---
+import PageFooter from '../components/PageFooter.astro'
 import Base from '../layouts/Base.astro'
 ---
 <Base
   title="research synthesis — janice quach"
   description="turn your raw research into structured decisions. themes, insights, tensions, priority actions — delivered within 48 hours. $300 per engagement."
 >
-  <a href="/" class="back-btn">← home</a>
+  <a href="/" class="back-btn">← back</a>
 
   <section class="synthesis">
     <div class="orb orb-1" aria-hidden="true"></div>
@@ -25,6 +26,8 @@ import Base from '../layouts/Base.astro'
       <a href="https://synthesis.janicequach.workers.dev" class="cta">submit your research →</a>
     </div>
   </section>
+
+  <PageFooter theme="contact" />
 </Base>
 
 <style>
