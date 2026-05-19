@@ -27,3 +27,7 @@ the harder part is leading through that uncertainty. my team looks to me for sig
 what i do feel certain about: the designers who will do well with AI are the ones who already know what good looks like. not because AI needs to be corrected constantly (though sometimes it does) — but because "good enough" is seductive when the output is fast and polished. you need a strong internal standard before the bar starts moving.
 
 i've been thinking about that a lot lately. and i still don't have a tidy conclusion. which is maybe the most honest thing i can say about where i'm at.
+
+---
+
+if you're working on something and you're not sure whether your design is actually communicating what you think it is, i offer [structured design critique](/critique) — analysis at the level of the argument, not the aesthetic. $75.

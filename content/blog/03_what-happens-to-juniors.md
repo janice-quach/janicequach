@@ -23,3 +23,7 @@ what i do think: the role of a senior designer shifts. less "here's how you do t
 the risk is we end up with designers who can prompt well but don't have a strong enough internal standard to catch the subtle wrong. the outputs will be confident. the misses will be invisible until they're not.
 
 i don't have a framework for this. i'm watching my team closely and trying to name what i'm seeing as i see it. if you're leading a design team right now and you've worked out something that's actually helping, i'd genuinely like to hear it.
+
+---
+
+one thing i keep coming back to: the designers who catch AI's subtle misses are the ones who've had real critique on their own work. i offer [structured design critique](/critique) — the kind that builds the internal standard you can't fake. $75.

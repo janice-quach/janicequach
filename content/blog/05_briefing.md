@@ -29,3 +29,7 @@ the AI didn't make me a better briefer. it just made the gap visible fast enough
 i think that's what a lot of AI tools are actually doing — they're mirrors. not for the quality of the output, but for the quality of the input. they surface the thinking work that was always required and was always being quietly skipped.
 
 whether you actually do that work is still on you.
+
+---
+
+the same applies to design work. if you want someone to engage with what you're actually claiming — not just respond to what's on the surface — i offer [structured design critique](/critique). $75.
