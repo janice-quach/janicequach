@@ -23,3 +23,7 @@ what staying gave me: depth. i know this product, this industry, these people. i
 what staying costs: sometimes you have to actively resist the gravity of how things have always been done. the longer you're somewhere the more you accumulate — processes, opinions, unspoken assumptions about what's possible. the risk isn't stagnation exactly. it's calcification. knowing too much can make you stop asking why.
 
 i try to stay curious about the place i know best. it's harder than it sounds.
+
+---
+
+if you're navigating a decision that's been circling for too long — team direction, a strategic call, something with too many inputs and no clear owner — i offer [structured research synthesis](/synthesise) to turn the noise into a clear recommendation. $300.
