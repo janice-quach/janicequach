@@ -2,7 +2,7 @@
 import PageFooter from '../components/PageFooter.astro'
 import Base from '../layouts/Base.astro'
 ---
-<Base title="contact — janice quach" description="Get in touch about design consulting, workshops, or collaboration.">
+<Base title="contact — janice quach" description="Get in touch with Janice Quach.">
     <div class="contact-page">
         <a class="back-btn" href="/" aria-label="Back to home">← back</a>
 
@@ -13,23 +13,12 @@ import Base from '../layouts/Base.astro'
             <header class="contact-header">
                 <p class="contact-label">get in touch</p>
                 <h1>let's talk about<br>how things should work</h1>
-                <p class="contact-intro">I'm a design leader with 10 years building products, teams, and systems. If you're working on something that needs clearer thinking — research, strategy, design systems, team structure — I'd like to hear about it.</p>
+                <p class="contact-intro">i'm a design leader with 10 years building products, teams, and systems. say hi.</p>
             </header>
 
             <div class="contact-cta">
                 <a class="contact-email" href="mailto:hello@janicequach.com">hello@janicequach.com</a>
                 <p class="contact-note">or find me on <a href="https://linkedin.com/in/janicequach" target="_blank" rel="noopener noreferrer">linkedin</a></p>
-            </div>
-
-            <div class="contact-offers">
-                <div class="offer">
-                    <h2>consulting</h2>
-                    <p>Design strategy, research ops, team coaching. For companies that need senior design thinking without a full-time hire.</p>
-                </div>
-                <div class="offer">
-                    <h2>workshops</h2>
-                    <p>Half-day or full-day sessions. Research synthesis, design system kickoffs, team alignment. You leave with decisions, not sticky notes.</p>
-                </div>
             </div>
         </div>
 
@@ -131,39 +120,9 @@ import Base from '../layouts/Base.astro'
         opacity: 0.8;
     }
 
-    .contact-offers {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2.5rem;
-    }
-
-    .offer h2 {
-        font-size: 0.65rem;
-        font-family: 'Inter', sans-serif;
-        font-weight: 500;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: rgba(58, 53, 48, 0.3);
-        margin-bottom: 1rem;
-    }
-
-    .offer p {
-        font-size: 0.9rem;
-        font-weight: 300;
-        line-height: 1.85;
-        color: #5a5550;
-    }
-
     @media (max-width: 768px) {
         .contact-content {
             padding: 6rem 1.5rem 4rem;
-        }
-
-        .contact-offers {
-            grid-template-columns: 1fr;
-            gap: 2rem;
         }
     }
 </style>
