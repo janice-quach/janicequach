@@ -11,14 +11,22 @@ const posts = (await getCollection('blog'))
         .find((l: string) => l.startsWith('# '))
         ?.replace(/^#\s*/, '') ||
       'Untitled'
+    // Preserve numeric prefix for stable sort tie-breaking before stripping it
+    const num = parseInt(post.id.match(/^(\d+)/)?.[1] ?? '0', 10)
     return {
       slug: post.id.replace(/^\d+_/, ''),
+      num,
       title,
       date: post.data.date,
       description: post.data.description || '',
     }
   })
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .sort((a, b) => {
+    const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime()
+    if (dateDiff !== 0) return dateDiff
+    // Stable tie-break: higher file number = newer post
+    return b.num - a.num
+  })
 ---
 
 <Base title="writing — janice quach" description="thoughts on design, leadership, and how things should work.">
