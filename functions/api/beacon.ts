@@ -14,8 +14,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       scroll?: number
       time?: number
       referrer?: string
+      cta?: string
     }
-    const { slug, scroll, time, referrer } = body
+    const { slug, scroll, time, referrer, cta } = body
 
     if (!slug || typeof scroll !== 'number' || typeof time !== 'number') {
       return new Response('bad', { status: 400, headers })
@@ -23,7 +24,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     try {
       context.env.READS?.writeDataPoint({
-        blobs: [slug, referrer || ''],
+        blobs: [slug, referrer || '', cta || ''],
         doubles: [scroll, time],
         indexes: [slug],
       })

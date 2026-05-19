@@ -73,6 +73,23 @@ const date = new Date(post.data.date).toLocaleDateString('en-US', {
         document.addEventListener('visibilitychange', () => {
           if (document.visibilityState === 'hidden') send()
         })
+
+        // CTA click tracking — fire immediately on /critique or /synthesise links
+        document.querySelectorAll<HTMLAnchorElement>('a[href^="/critique"], a[href^="/synthesise"]').forEach((el) => {
+          el.addEventListener('click', () => {
+            track()
+            navigator.sendBeacon(
+              '/api/beacon',
+              JSON.stringify({
+                slug,
+                scroll: maxScroll,
+                time: Math.round((Date.now() - start) / 1000),
+                referrer: document.referrer || '',
+                cta: el.getAttribute('href') || '',
+              })
+            )
+          })
+        })
       })()
     </script>
 
