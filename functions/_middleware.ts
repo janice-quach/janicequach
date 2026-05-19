@@ -75,10 +75,10 @@ export const onRequest: PagesFunction<{ BLOG_PASSWORD: string; SESSION_TOKEN: st
   const isBlogPost = url.pathname.startsWith('/blog/') && url.pathname !== '/blog/'
   if (!isBlogPost) return next()
 
-  // Blog post auth — fail closed only for the protected paths
-  // If env vars aren't configured, redirect to blog index rather than bare 503
+  // Blog post auth — only gate when env vars are explicitly configured.
+  // If not set, posts are public (fail open) so content is reachable before CF vars are wired.
   if (!env.BLOG_PASSWORD || !env.SESSION_TOKEN) {
-    return new Response(null, { status: 302, headers: { Location: '/blog/' } })
+    return next()
   }
   const PASSWORD = env.BLOG_PASSWORD
   const SESSION_TOKEN = env.SESSION_TOKEN
