@@ -62,6 +62,7 @@
       "**/src/**/*.js",
       "**/src/**/*.astro",
       "**/src/**/*.css",
+      "**/functions/**/*.ts",
       "**/*.mjs",
       "!**/node_modules",
       "!**/dist",

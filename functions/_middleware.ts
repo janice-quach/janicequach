@@ -64,7 +64,11 @@ const LOGIN_HTML = `<!DOCTYPE html>
 </body>
 </html>`
 
-export const onRequest: PagesFunction<{ BLOG_PASSWORD: string; SESSION_TOKEN: string }> = async ({ request, next, env }) => {
+export const onRequest: PagesFunction<{ BLOG_PASSWORD: string; SESSION_TOKEN: string }> = async ({
+  request,
+  next,
+  env,
+}) => {
   const url = new URL(request.url)
 
   // Public: everything except individual blog posts (index at /blog/ is public)
@@ -72,8 +76,9 @@ export const onRequest: PagesFunction<{ BLOG_PASSWORD: string; SESSION_TOKEN: st
   if (!isBlogPost) return next()
 
   // Blog post auth — fail closed only for the protected paths
+  // If env vars aren't configured, redirect to blog index rather than bare 503
   if (!env.BLOG_PASSWORD || !env.SESSION_TOKEN) {
-    return new Response('Blog auth not configured', { status: 503 })
+    return new Response(null, { status: 302, headers: { Location: '/blog/' } })
   }
   const PASSWORD = env.BLOG_PASSWORD
   const SESSION_TOKEN = env.SESSION_TOKEN
@@ -99,14 +104,11 @@ export const onRequest: PagesFunction<{ BLOG_PASSWORD: string; SESSION_TOKEN: st
         },
       })
     }
-    return new Response(
-      LOGIN_HTML.replace('{{ERROR}}', '<p class="error">wrong password</p>'),
-      { status: 401, headers: { 'Content-Type': 'text/html' } },
-    )
+    return new Response(LOGIN_HTML.replace('{{ERROR}}', '<p class="error">wrong password</p>'), {
+      status: 401,
+      headers: { 'Content-Type': 'text/html' },
+    })
   }
 
-  return new Response(
-    LOGIN_HTML.replace('{{ERROR}}', ''),
-    { status: 200, headers: { 'Content-Type': 'text/html' } },
-  )
+  return new Response(LOGIN_HTML.replace('{{ERROR}}', ''), { status: 200, headers: { 'Content-Type': 'text/html' } })
 }
